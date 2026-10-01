@@ -9,15 +9,15 @@ class RomanticAudioPlayer {
     this.isPlaying = false;
     this.activeMode = null; // 'audio-file' | 'synth'
     
-    // Archivo de audio principal (coloca tu canción MP3 en assets/audio/entrada-novia.mp3)
+    // Archivo de audio principal: Thinking Out Loud (Ed Sheeran)
     this.audioElement = new Audio();
     this.audioElement.loop = true;
     this.audioElement.preload = "auto";
     
-    // Rutas candidatas para reproducir (MP3 o WAV generado)
+    // Rutas candidatas: Local primero, respaldo a CDN de ChungDoi y WAV local
     this.candidateSources = [
-      'assets/audio/entrada-novia.mp3',
-      'assets/audio/cancion.mp3',
+      'assets/audio/thinking-out-loud.mp3',
+      'https://cdn.chungdoi.com/music/thinking-out-loud.mp3',
       'assets/audio/entrada-novia.wav'
     ];
     this.currentSourceIndex = 0;
@@ -129,6 +129,36 @@ class RomanticAudioPlayer {
     }
   }
 
+  /**
+   * Reproduce con incremento gradual de volumen al interactuar con el sobre
+   */
+  async playWithFadeIn(targetVolume = 0.5, durationMs = 1500) {
+    if (this.isPlaying) return true;
+    this.isPlaying = true;
+    
+    try {
+      this.audioElement.volume = 0;
+      await this.audioElement.play();
+      this.activeMode = 'audio-file';
+
+      const startTime = performance.now();
+      const step = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / durationMs);
+        this.audioElement.volume = progress * targetVolume;
+        if (progress < 1 && this.isPlaying && this.activeMode === 'audio-file') {
+          requestAnimationFrame(step);
+        }
+      };
+      requestAnimationFrame(step);
+      return true;
+    } catch (err) {
+      console.warn("Audio file play blocked or failed, falling back to synth:", err);
+      this.startSynth();
+      return true;
+    }
+  }
+
   async toggle() {
     if (this.isPlaying) {
       this.isPlaying = false;
@@ -140,18 +170,12 @@ class RomanticAudioPlayer {
       this.activeMode = null;
       return false;
     } else {
-      this.isPlaying = true;
-      try {
-        // Intentar reproducir el archivo de audio de entrada nupcial
-        await this.audioElement.play();
-        this.activeMode = 'audio-file';
-        return true;
-      } catch (err) {
-        this.startSynth();
-        return true;
-      }
+      return await this.playWithFadeIn(0.5, 800);
     }
   }
 }
 
 export const musicPlayer = new RomanticAudioPlayer();
+if (typeof window !== 'undefined') {
+  window.weddingMusic = musicPlayer;
+}

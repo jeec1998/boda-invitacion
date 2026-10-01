@@ -73,6 +73,11 @@ body {
   overflow-x: hidden;
 }
 
+body.envelope-active {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
 /* Fondo decorativo con textura sutil */
 body::before {
   content: '';
@@ -1123,3 +1128,386 @@ body::before {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   SOBRE INTERACTIVO DE BIENVENIDA (Inspirado en ChungDoi / Minimalism Dark Red)
+   ========================================================================== */
+
+:root {
+  --env-wine-deep: #2c0508;
+  --env-wine-mid: #511419;
+  --env-wine-bright: #731b23;
+  --env-gold: #c9a24a;
+  --env-gold-light: #e5c982;
+  --env-paper: #fffcf8;
+}
+
+/* Overlay a pantalla completa */
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #6e1a20 0%, #460f14 55%, #240508 100%);
+  padding: 20px;
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.85s;
+  will-change: opacity, transform;
+}
+
+/* Estado una vez abierto */
+.envelope-overlay.opened {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Partículas ambientales flotantes (corazones y pétalos cayendo) */
+.envelope-ambient-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.ambient-item {
+  position: absolute;
+  top: -30px;
+  font-size: 1rem;
+  color: rgba(236, 228, 216, 0.45);
+  animation-name: ambientFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  user-select: none;
+}
+
+.ambient-item.a-1  { left: 10%; font-size: 14px; color: rgba(201, 162, 74, 0.45); animation-duration: 18s; animation-delay: 0s; }
+.ambient-item.a-2  { left: 22%; font-size: 18px; color: rgba(236, 228, 216, 0.35); animation-duration: 22s; animation-delay: -5s; }
+.ambient-item.a-3  { left: 35%; font-size: 12px; color: rgba(168, 50, 59, 0.6); animation-duration: 16s; animation-delay: -9s; }
+.ambient-item.a-4  { left: 48%; font-size: 16px; color: rgba(201, 162, 74, 0.5); animation-duration: 24s; animation-delay: -3s; }
+.ambient-item.a-5  { left: 62%; font-size: 13px; color: rgba(236, 228, 216, 0.4); animation-duration: 20s; animation-delay: -11s; }
+.ambient-item.a-6  { left: 74%; font-size: 20px; color: rgba(201, 162, 74, 0.4); animation-duration: 19s; animation-delay: -7s; }
+.ambient-item.a-7  { left: 86%; font-size: 11px; color: rgba(168, 50, 59, 0.55); animation-duration: 17s; animation-delay: -13s; }
+.ambient-item.a-8  { left: 16%; font-size: 15px; color: rgba(236, 228, 216, 0.3); animation-duration: 23s; animation-delay: -15s; }
+.ambient-item.a-9  { left: 54%; font-size: 17px; color: rgba(201, 162, 74, 0.45); animation-duration: 21s; animation-delay: -2s; }
+.ambient-item.a-10 { left: 92%; font-size: 14px; color: rgba(236, 228, 216, 0.35); animation-duration: 25s; animation-delay: -8s; }
+
+@keyframes ambientFall {
+  0% {
+    transform: translateY(-30px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(25px);
+    opacity: 0;
+  }
+}
+
+/* Contenedor del Sobre / Tarjeta */
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  z-index: 10;
+  margin: auto;
+}
+
+/* Sello de Lacre 3D Superior */
+.envelope-seal {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #7e1921 0%, #4a0c11 65%, #250205 100%);
+  border: 1px solid rgba(229, 201, 130, 0.35);
+  box-shadow: 0 6px 20px rgba(36, 5, 8, 0.6),
+              inset 0 2px 4px rgba(255, 255, 255, 0.35),
+              inset 0 -3px 5px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  animation: sealPulse 2.2s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.envelope-seal:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
+.seal-icon {
+  width: 26px;
+  height: 26px;
+  fill: #f5ebe1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes sealPulse {
+  0%, 100% {
+    box-shadow: 0 4px 18px rgba(81, 20, 25, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 6px 26px rgba(110, 26, 32, 0.75), 0 0 16px rgba(201, 162, 74, 0.45), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%) scale(1.04);
+  }
+}
+
+/* Tarjeta del Sobre */
+.envelope-card {
+  position: relative;
+  background: var(--env-paper);
+  border-radius: 12px;
+  border: 1px solid rgba(81, 20, 25, 0.16);
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.55),
+              0 10px 24px rgba(0, 0, 0, 0.3),
+              0 0 40px rgba(81, 20, 25, 0.12);
+  overflow: hidden;
+  padding: 48px 24px 34px;
+  text-align: center;
+}
+
+/* Filigranas decorativas en las esquinas */
+.envelope-corner-decor {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+.envelope-corner-decor.corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid var(--env-wine-mid);
+  border-left: 2px solid var(--env-wine-mid);
+  border-top-left-radius: 4px;
+}
+
+.envelope-corner-decor.corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid var(--env-wine-mid);
+  border-right: 2px solid var(--env-wine-mid);
+  border-bottom-right-radius: 4px;
+}
+
+.envelope-card-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-tag-intro {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--env-wine-mid);
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.envelope-couple-names {
+  font-family: var(--font-serif);
+  font-size: 2.35rem;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--env-wine-mid);
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-amp {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--env-gold);
+  margin: 2px 0;
+  font-weight: 400;
+}
+
+/* Divisor elegante */
+.envelope-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 6px 0 12px;
+  width: 100%;
+}
+
+.envelope-divider .divider-line {
+  height: 1px;
+  width: 48px;
+  background: linear-gradient(90deg, transparent, var(--env-wine-mid), transparent);
+}
+
+.envelope-divider .divider-symbol {
+  color: var(--env-wine-mid);
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
+
+.envelope-wedding-date {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--env-wine-mid);
+  letter-spacing: 0.04em;
+  opacity: 0.88;
+  margin-bottom: 18px;
+}
+
+/* Contenedor de Invitado */
+.envelope-guest-container {
+  margin-bottom: 24px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope-invitation-text {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #632228;
+  letter-spacing: 0.02em;
+}
+
+.envelope-guest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(81, 20, 25, 0.06);
+  border: 1px solid rgba(81, 20, 25, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-top: 6px;
+}
+
+.guest-to-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--env-wine-bright);
+}
+
+.envelope-guest-name {
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--env-wine-deep);
+}
+
+/* Botón "Abrir" con Destello Continuo */
+.btn-open-envelope {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 48px;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #f7eee7;
+  background-color: var(--env-wine-mid);
+  border: 1px solid rgba(201, 162, 74, 0.45);
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 20px rgba(81, 20, 25, 0.4),
+              inset 0 1px 2px rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-open-envelope:hover {
+  background-color: var(--env-wine-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(81, 20, 25, 0.55),
+              0 0 16px rgba(201, 162, 74, 0.35);
+}
+
+.btn-open-envelope:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-open-envelope .btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Efecto Shimmer Continuo */
+.btn-open-envelope .btn-shine {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-25deg);
+  animation: btnShine 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes btnShine {
+  0% {
+    left: -120%;
+  }
+  50%, 100% {
+    left: 140%;
+  }
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 400px) {
+  .envelope-card {
+    padding: 44px 18px 28px;
+  }
+  .envelope-couple-names {
+    font-size: 2rem;
+  }
+  .envelope-seal {
+    width: 50px;
+    height: 50px;
+    top: -24px;
+  }
+  .seal-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .btn-open-envelope {
+    padding: 11px 40px;
+    font-size: 1.15rem;
+  }
+}
+

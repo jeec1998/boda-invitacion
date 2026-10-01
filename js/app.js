@@ -14,11 +14,55 @@ export const WEDDING_DATE = new Date("2026-12-19T17:00:00").getTime();
 let currentGuest = DEFAULT_GUEST;
 
 document.addEventListener('DOMContentLoaded', () => {
+  initEnvelope();
   initGuestFromUrl();
   initCountdown();
   initPetalsCanvas();
   initControls();
 });
+
+/**
+ * Inicializa la experiencia del sobre interactivo de bienvenida
+ */
+function initEnvelope() {
+  const envelopeOverlay = document.getElementById('envelope-overlay');
+  const openBtn = document.getElementById('btn-open-envelope');
+  const seal = document.querySelector('.envelope-seal');
+  
+  if (!envelopeOverlay) return;
+
+  // Congelar scroll del body mientras el sobre cubre la pantalla
+  document.body.classList.add('envelope-active');
+
+  let hasOpened = false;
+
+  const handleOpen = async () => {
+    if (hasOpened) return;
+    hasOpened = true;
+
+    // 1. Iniciar música de forma síncrona en el callback del clic (habilita autoplay en móviles)
+    const musicBtn = document.getElementById('music-toggle-btn');
+    try {
+      const playing = await musicPlayer.playWithFadeIn(0.5, 1200);
+      if (musicBtn) musicBtn.classList.toggle('is-playing', playing);
+    } catch (err) {
+      console.warn("Autoplay al abrir sobre:", err);
+    }
+
+    // 2. Animar apertura y desvanecimiento
+    envelopeOverlay.classList.add('opened');
+    document.body.classList.remove('envelope-active');
+
+    // 3. Remover del flujo del DOM tras terminar la transición CSS
+    setTimeout(() => {
+      envelopeOverlay.style.display = 'none';
+      envelopeOverlay.setAttribute('aria-hidden', 'true');
+    }, 900);
+  };
+
+  if (openBtn) openBtn.addEventListener('click', handleOpen);
+  if (seal) seal.addEventListener('click', handleOpen);
+}
 
 /**
  * Obtiene el invitado desde los parámetros de la URL (?nombre=, ?id=, ?n=)
@@ -49,6 +93,12 @@ function initGuestFromUrl() {
     if (guestSection) guestSection.style.display = 'none';
     if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'none';
     document.title = "Boda de Edgar Enríquez & Mariela Cortez | Invitación Especial";
+    
+    // Configurar sobre en modo general
+    const envGuestBadge = document.getElementById('envelope-guest-badge');
+    const envInvText = document.getElementById('envelope-invitation-text');
+    if (envGuestBadge) envGuestBadge.style.display = 'none';
+    if (envInvText) envInvText.textContent = "Les Invitamos Cordialmente";
   }
 }
 
@@ -71,6 +121,20 @@ export function renderGuest(guest) {
   if (messageEl) messageEl.textContent = guest.customNote || "Tenemos el honor de invitarte a celebrar nuestra boda.";
   if (badgeEl) badgeEl.textContent = "Invitación de Honor";
   if (rsvpNameEl) rsvpNameEl.textContent = guest.fullName || "Familia & Amigos";
+
+  // Actualizar también el sobre exterior si el usuario aún no lo ha abierto
+  const envGuestBadge = document.getElementById('envelope-guest-badge');
+  const envGuestName = document.getElementById('envelope-guest-name');
+  const envInvText = document.getElementById('envelope-invitation-text');
+
+  if (guest && guest.fullName) {
+    if (envGuestBadge) envGuestBadge.style.display = 'inline-flex';
+    if (envGuestName) envGuestName.textContent = guest.fullName;
+    if (envInvText) envInvText.textContent = "Tenemos el honor de invitar a:";
+  } else {
+    if (envGuestBadge) envGuestBadge.style.display = 'none';
+    if (envInvText) envInvText.textContent = "Les Invitamos Cordialmente";
+  }
 
   // Actualizar título de la pestaña del navegador
   document.title = `Boda de Edgar Enríquez & Mariela Cortez | Invitación para ${guest.fullName}`;

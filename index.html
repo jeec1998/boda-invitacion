@@ -25,6 +25,71 @@
 </head>
 <body>
 
+  <!-- SOBRE INTERACTIVO DE BIENVENIDA (Inspirado en ChungDoi / Minimalism Dark Red) -->
+  <aside id="envelope-overlay" class="envelope-overlay" role="dialog" aria-modal="true" aria-label="Sobre de Invitación de Boda">
+    <!-- Partículas ambientales de corazones y pétalos flotantes -->
+    <div class="envelope-ambient-particles" aria-hidden="true">
+      <span class="ambient-item a-1">♥</span>
+      <span class="ambient-item a-2">❦</span>
+      <span class="ambient-item a-3">♥</span>
+      <span class="ambient-item a-4">❀</span>
+      <span class="ambient-item a-5">♥</span>
+      <span class="ambient-item a-6">❦</span>
+      <span class="ambient-item a-7">♥</span>
+      <span class="ambient-item a-8">❀</span>
+      <span class="ambient-item a-9">♥</span>
+      <span class="ambient-item a-10">❦</span>
+    </div>
+
+    <!-- Contenedor del Sobre / Tarjeta Nupcial -->
+    <div class="envelope-wrapper">
+      <!-- Sello de Lacre 3D con animación de pulso -->
+      <div class="envelope-seal" aria-hidden="true" title="Sello de amor">
+        <svg viewBox="0 0 24 24" class="seal-icon" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+
+      <!-- Tarjeta del Sobre -->
+      <div class="envelope-card">
+        <!-- Decoraciones botánicas en las esquinas -->
+        <div class="envelope-corner-decor corner-tl" aria-hidden="true"></div>
+        <div class="envelope-corner-decor corner-br" aria-hidden="true"></div>
+
+        <div class="envelope-card-content">
+          <p class="envelope-tag-intro">Nuestra Boda</p>
+
+          <h1 class="envelope-couple-names">
+            <span class="name-part">Edgar</span>
+            <span class="envelope-amp">&amp;</span>
+            <span class="name-part">Mariela</span>
+          </h1>
+
+          <div class="envelope-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-symbol">❦</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <p class="envelope-wedding-date">19 de Diciembre de 2026</p>
+
+          <div class="envelope-guest-container">
+            <p id="envelope-invitation-text" class="envelope-invitation-text">Les Invitamos Cordialmente</p>
+            <div id="envelope-guest-badge" class="envelope-guest-badge" style="display: none;">
+              <span class="guest-to-label">Para:</span>
+              <strong id="envelope-guest-name" class="envelope-guest-name">Familia & Amigos</strong>
+            </div>
+          </div>
+
+          <button id="btn-open-envelope" type="button" class="btn-open-envelope" aria-label="Abrir invitación y escuchar canción">
+            <span class="btn-text">Abrir</span>
+            <div class="btn-shine" aria-hidden="true"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <!-- Canvas para animación sutil de partículas y pétalos dorados -->
   <canvas id="petals-canvas"></canvas>
 
