@@ -63,7 +63,7 @@
           <span>Sábado, 19 de Diciembre de 2026 &bull; Riobamba</span>
         </div>
         <div class="scroll-indicator" aria-hidden="true">
-          <span>Desliza para ver tu invitación</span>
+          <span>Desliza para ver los detalles</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
@@ -71,8 +71,8 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 2: TARJETA DE INVITADO DINÁMICA -->
-    <section class="guest-section" id="invitacion">
+    <!-- SECCIÓN 2: TARJETA DE INVITADO DINÁMICA (Solo visible con ID o búsqueda) -->
+    <section class="guest-section" id="invitacion" style="display: none;">
       <article class="guest-card">
         <div id="guest-badge" class="invitation-badge">Invitación de Honor</div>
         
@@ -252,8 +252,8 @@
           Por favor llena nuestro formulario oficial de confirmación antes del <strong>1 de Diciembre de 2026</strong> para registrar tu asistencia y ayudarnos con los preparativos.
         </p>
 
-        <p style="font-weight: 500; margin-bottom: 22px;">
-          Confirmando como: <span id="rsvp-guest-name" style="color: var(--gold-600); font-weight: 600;">Familia & Amigos</span>
+        <p id="rsvp-guest-info" style="font-weight: 500; margin-bottom: 22px; display: none;">
+          Confirmando como: <span id="rsvp-guest-name" style="color: var(--gold-600); font-weight: 600;"></span>
         </p>
 
         <div class="rsvp-actions" style="display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 440px; margin: 0 auto;">

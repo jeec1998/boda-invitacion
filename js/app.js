@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initGuestFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const guestQuery = params.get('nombre') || params.get('n') || params.get('id') || params.get('p') || params.get('invitacion');
+  const guestQuery = params.get('id') || params.get('nombre') || params.get('n') || params.get('p') || params.get('invitacion');
+  const guestSection = document.getElementById('invitacion');
+  const rsvpGuestContainer = document.getElementById('rsvp-guest-info');
   
   if (guestQuery) {
     const found = findGuest(guestQuery);
@@ -38,12 +40,16 @@ function initGuestFromUrl() {
         customNote: "Nos encantará contar con tu presencia en este momento tan especial."
       };
     }
+    if (guestSection) guestSection.style.display = 'flex';
+    if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'block';
+    renderGuest(currentGuest);
   } else {
-    // Si no hay parámetro, cargar el invitado predeterminado
-    currentGuest = GUESTS_DATABASE[0] || DEFAULT_GUEST;
+    // Si en la URL no viene el id, NO se renderiza la sección de invitación
+    currentGuest = null;
+    if (guestSection) guestSection.style.display = 'none';
+    if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'none';
+    document.title = "Boda de Edgar Enríquez & Mariela Cortez | Invitación Especial";
   }
-
-  renderGuest(currentGuest);
 }
 
 /**
@@ -170,11 +176,19 @@ function initControls() {
   }
 
   function selectGuest(guest) {
+    const guestSection = document.getElementById('invitacion');
+    if (guestSection) guestSection.style.display = 'flex';
+
+    const rsvpGuestContainer = document.getElementById('rsvp-guest-info');
+    if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'block';
+
     renderGuest(guest);
     updateUrlParam(guest.id);
     closeModal();
     showToast(`✨ Invitación cargada para: ${guest.fullName}`);
-    document.querySelector('.guest-section')?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      guestSection?.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
   }
 
   function handleSearch() {
