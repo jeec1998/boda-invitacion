@@ -95,20 +95,50 @@ export const DEFAULT_GUEST = {
 };
 
 /**
- * Busca un invitado por su número (ID o código)
+ * Normaliza cadenas removiendo tildes y caracteres diacríticos
+ */
+function normalizeText(text) {
+  return String(text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+/**
+ * Busca todos los invitados cuyo nombre contenga el texto ingresado
+ * @param {string} query
+ * @returns {Array} Lista de invitados que coinciden
+ */
+export function searchGuestsByName(query) {
+  if (!query) return [];
+  const cleanQ = normalizeText(query);
+  if (!cleanQ) return [];
+
+  return GUESTS_DATABASE.filter(g => {
+    const cleanName = normalizeText(g.fullName);
+    return cleanName.includes(cleanQ);
+  });
+}
+
+/**
+ * Busca un invitado por nombre o identificador
  * @param {string|number} query
- * @returns {object} Datos del invitado o DEFAULT_GUEST
+ * @returns {object|null} Datos del invitado o null si no se encuentra
  */
 export function findGuest(query) {
   if (!query) return DEFAULT_GUEST;
   
-  const cleaned = String(query).trim().toLowerCase();
+  const cleanQ = normalizeText(query);
   
-  const found = GUESTS_DATABASE.find(g => 
-    String(g.id) === cleaned || 
-    String(g.code).toLowerCase() === cleaned ||
-    g.fullName.toLowerCase().includes(cleaned)
-  );
+  // Buscar coincidencia por nombre (exacta o contenida) o por ID/código
+  const found = GUESTS_DATABASE.find(g => {
+    const cleanName = normalizeText(g.fullName);
+    return cleanName === cleanQ ||
+      cleanName.includes(cleanQ) ||
+      String(g.id) === String(query).trim() ||
+      String(g.code).toLowerCase() === String(query).trim().toLowerCase();
+  });
 
   return found || null;
 }
