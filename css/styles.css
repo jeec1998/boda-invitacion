@@ -207,7 +207,8 @@ body::before {
 }
 
 /* ==========================================================================
-   HERO SECTION
+   HERO SECTION - SOBRE EDITORIAL NUPCIAL CON FOTOGRAFÍA EN MOVIMIENTO
+   Inspirado en ChungDoi / Minimalism Dark Red
    ========================================================================== */
 
 .hero-section {
@@ -219,112 +220,430 @@ body::before {
   align-items: center;
   text-align: center;
   padding: 100px 20px 60px;
-  background: var(--wine-gradient-hero),
-              url('../assets/images/hero.jpg') center/cover no-repeat;
-  color: var(--text-light);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  overflow-x: clip;
+}
+
+/* Textura sutil de papel de arte */
+.hero-paper-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/paper.webp');
+  background-size: 100% auto;
+  background-position: top center;
+  mix-blend-mode: multiply;
+  opacity: 0.48;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grabado de fondo de arquitectura histórica */
+.hero-castle-watermark {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  transform: translateX(-50%);
+  width: 140%;
+  max-width: 880px;
+  pointer-events: none;
+  opacity: 0.11;
+  mix-blend-mode: multiply;
+  z-index: 2;
+}
+
+.castle-watermark-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .hero-content {
-  max-width: 780px;
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  width: 100%;
   margin: 0 auto;
-  animation: fadeInUp 1.2s ease-out;
-}
-
-.monogram-crest {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(229, 201, 130, 0.45);
-  background: rgba(81, 20, 25, 0.55);
-  backdrop-filter: blur(8px);
-  margin-bottom: 24px;
-  box-shadow: 0 0 32px rgba(81, 20, 25, 0.65), 0 0 16px rgba(201, 162, 74, 0.25);
-}
-
-.monogram-text {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  letter-spacing: 3px;
-  color: var(--gold-300);
 }
 
 .hero-subtitle {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   text-transform: uppercase;
-  font-size: 0.82rem;
-  letter-spacing: 5px;
-  color: var(--gold-300);
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--wine-700);
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   ESCENARIO DEL SOBRE NUPCIAL Y FOTO CON MOVIMIENTO (COMPOSICIÓN CENTRAL)
+   ========================================================================== */
+
+.hero-envelope-stage {
+  position: relative;
+  z-index: 10;
+  width: 84%;
+  max-width: 320px;
+  margin: 24px auto 32px;
+  perspective: 1000px;
+}
+
+@media (min-width: 768px) {
+  .hero-envelope-stage {
+    max-width: 410px;
+    margin: 32px auto 42px;
+  }
+}
+
+.envelope-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 333 / 384;
+  filter: drop-shadow(0 20px 36px rgba(44, 5, 8, 0.22));
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+}
+
+/* 1. Fondo interior del sobre */
+.env-back-img {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 10;
+}
+
+/* 2. Contenedor de la foto con animación flotante */
+.env-photo-holder {
+  position: absolute;
+  left: 31%;
+  top: -4%;
+  z-index: 20;
+  width: 65%;
+  cursor: pointer;
+  transform-origin: center bottom;
+  will-change: transform;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Animación continua de flotación orgánica */
+.env-photo-holder.is-floating {
+  animation: drFloat 6.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+@keyframes drFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* Animación de emergencia al abrir el sobre */
+.env-photo-holder.reveal-rising {
+  animation: photoRevealRising 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes photoRevealRising {
+  0% {
+    transform: translateY(60px) scale(0.92);
+    opacity: 0.5;
+  }
+  60% {
+    transform: translateY(-12px) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Marco Polaroid / Cuadro de arte con rotación y sombra */
+.env-photo-polaroid {
+  aspect-ratio: 221 / 309;
+  transform: rotate(12deg);
+  border: 7px solid #FFFFFF;
+  background: #FFFFFF;
+  border-radius: 2px;
+  box-shadow: 2px 5px 18px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.45s ease;
+}
+
+.env-photo-holder:hover .env-photo-polaroid,
+.env-photo-holder:focus-visible .env-photo-polaroid {
+  transform: rotate(6deg) scale(1.05) translateY(-8px);
+  box-shadow: 4px 16px 36px rgba(44, 5, 8, 0.38), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.env-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 26%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.env-photo-holder:hover .env-photo-img {
+  transform: scale(1.04);
+}
+
+/* Destello sutil de luz sobre la fotografía */
+.photo-shimmer {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: photoShimmerSweep 7s infinite 2.5s ease-in-out;
+}
+
+@keyframes photoShimmerSweep {
+  0%, 75% { left: -120%; }
+  100% { left: 220%; }
+}
+
+/* 3. Ramillete botánico de peonías y flores */
+.env-flowers-holder {
+  pointer-events: none;
+  position: absolute;
+  left: -3%;
+  top: -13%;
+  z-index: 25;
+  width: 44%;
+  animation: flowersFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes flowersFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.env-flowers-img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  object-fit: contain;
+  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.32));
+  transform: rotate(-17deg);
+}
+
+/* 4. Solapa frontal del sobre con lacre dorado */
+.env-cover-img {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 30;
+  filter: drop-shadow(0 -3px 8px rgba(0, 0, 0, 0.12));
+}
+
+/* ==========================================================================
+   NOMBRES DE LOS NOVIOS Y FECHA NUPCIAL
+   ========================================================================== */
+
+.couple-names-wrapper {
   margin-bottom: 12px;
-  font-weight: 400;
+  position: relative;
 }
 
 .couple-names {
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-size: clamp(2.8rem, 7.5vw, 4.6rem);
   font-weight: 400;
   line-height: 1.1;
-  margin-bottom: 8px;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  color: var(--wine-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  text-shadow: 0 1px 3px rgba(81, 20, 25, 0.08);
 }
 
-.couple-names span {
-  font-family: var(--font-script);
-  font-size: clamp(3.2rem, 8vw, 5.8rem);
-  color: var(--gold-300);
+.couple-names .first-name {
   display: inline-block;
-  margin: 0 8px;
+}
+
+.couple-names .ampersand {
+  font-family: var(--font-script);
+  font-size: clamp(3.2rem, 8.5vw, 5.2rem);
+  color: var(--gold-600);
+  font-weight: 300;
+  margin: 0 2px;
+  line-height: 0.8;
   vertical-align: middle;
 }
 
 .couple-full-names {
   font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.8vw, 0.92rem);
-  letter-spacing: 2px;
+  font-size: clamp(0.68rem, 1.6vw, 0.86rem);
+  letter-spacing: clamp(0.8px, 0.3vw, 1.8px);
   text-transform: uppercase;
-  color: var(--gold-300);
-  margin-top: 4px;
-  margin-bottom: 14px;
-  font-weight: 400;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  opacity: 0.92;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-weight: 500;
+  padding: 0 12px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .wedding-date-tag {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.05rem;
-  letter-spacing: 3px;
-  font-weight: 300;
-  text-transform: uppercase;
-  margin-top: 16px;
-  padding: 8px 24px;
-  background: rgba(44, 5, 8, 0.65);
-  backdrop-filter: blur(8px);
+  justify-content: center;
+  padding: 10px 22px;
+  max-width: min(92%, 460px);
+  background: rgba(81, 20, 25, 0.05);
+  border: 1px solid var(--wine-border);
   border-radius: var(--radius-full);
-  border: 1px solid rgba(201, 162, 74, 0.4);
-  color: var(--gold-300);
+  color: var(--wine-700);
+  font-size: clamp(0.78rem, 1.9vw, 0.95rem);
+  letter-spacing: clamp(1.2px, 0.4vw, 2.2px);
+  text-transform: uppercase;
+  font-weight: 400;
+  box-shadow: 0 2px 10px rgba(81, 20, 25, 0.04);
+  margin-top: 14px;
+  line-height: 1.4;
 }
 
 .scroll-indicator {
-  margin-top: 48px;
+  margin-top: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
+  gap: 6px;
+  font-size: 0.72rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  animation: bounce 2s infinite ease-in-out;
+  color: var(--wine-600);
+  opacity: 0.8;
+  animation: bounce 2.2s infinite ease-in-out;
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
+}
+
+/* ==========================================================================
+   MODAL LIGHTBOX PARA LA FOTOGRAFÍA NUPCIAL
+   ========================================================================== */
+
+.photo-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.photo-lightbox-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 3, 5, 0.88);
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-container {
+  position: relative;
+  z-index: 10;
+  max-width: 820px;
+  width: 100%;
+  animation: lightboxZoomIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes lightboxZoomIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2.4rem;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+  line-height: 1;
+}
+
+.lightbox-close-btn:hover {
+  transform: scale(1.15);
+  color: var(--gold-400);
+}
+
+.lightbox-card {
+  background: #FFFFFF;
+  padding: 12px 12px 18px;
+  border-radius: 4px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-full-img {
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 2px;
+  display: block;
+}
+
+.lightbox-footer {
+  text-align: center;
+  margin-top: 14px;
+}
+
+.lightbox-couple {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--wine-600);
+  margin-bottom: 2px;
+}
+
+.lightbox-date {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================

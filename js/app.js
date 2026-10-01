@@ -15,6 +15,7 @@ let currentGuest = DEFAULT_GUEST;
 
 document.addEventListener('DOMContentLoaded', () => {
   initEnvelope();
+  initHeroPhotoMovement();
   initGuestFromUrl();
   initCountdown();
   initPetalsCanvas();
@@ -30,6 +31,16 @@ function initEnvelope() {
   const seal = document.querySelector('.envelope-seal');
   
   if (!envelopeOverlay) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('open') === '1') {
+    envelopeOverlay.style.display = 'none';
+    envelopeOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('envelope-active');
+    const heroPhoto = document.getElementById('hero-photo-card');
+    if (heroPhoto) heroPhoto.classList.add('is-floating');
+    return;
+  }
 
   // Congelar scroll del body mientras el sobre cubre la pantalla
   document.body.classList.add('envelope-active');
@@ -53,7 +64,18 @@ function initEnvelope() {
     envelopeOverlay.classList.add('opened');
     document.body.classList.remove('envelope-active');
 
-    // 3. Remover del flujo del DOM tras terminar la transición CSS
+    // 3. Activar animación de emergencia de la foto del sobre en el Hero
+    const heroPhoto = document.getElementById('hero-photo-card');
+    if (heroPhoto) {
+      heroPhoto.classList.remove('is-floating');
+      heroPhoto.classList.add('reveal-rising');
+      setTimeout(() => {
+        heroPhoto.classList.remove('reveal-rising');
+        heroPhoto.classList.add('is-floating');
+      }, 1400);
+    }
+
+    // 4. Remover del flujo del DOM tras terminar la transición CSS
     setTimeout(() => {
       envelopeOverlay.style.display = 'none';
       envelopeOverlay.setAttribute('aria-hidden', 'true');
@@ -418,3 +440,86 @@ function initPetalsCanvas() {
 
   draw();
 }
+
+/**
+ * Inicializa el movimiento interactivo, perspectiva 3D y lightbox de la foto en el sobre
+ */
+function initHeroPhotoMovement() {
+  const stage = document.getElementById('hero-envelope-stage');
+  const scene = stage ? stage.querySelector('.envelope-scene') : null;
+  const photoHolder = document.getElementById('hero-photo-card');
+  const lightbox = document.getElementById('photo-lightbox-modal');
+  const closeBtn = document.getElementById('btn-close-lightbox');
+  const backdrop = document.getElementById('lightbox-backdrop');
+
+  if (!stage || !photoHolder) return;
+
+  // 1. Efecto sutil de perspectiva e inclinación 3D al mover el cursor sobre el escenario
+  let isMoving = false;
+  stage.addEventListener('mousemove', (e) => {
+    if (!scene) return;
+    const rect = stage.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    if (!isMoving) {
+      requestAnimationFrame(() => {
+        scene.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+        isMoving = false;
+      });
+      isMoving = true;
+    }
+  });
+
+  stage.addEventListener('mouseleave', () => {
+    if (scene) {
+      scene.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+    }
+  });
+
+  // 2. Soporte para acelerómetro / inclinación suave en móviles si está disponible
+  if (window.DeviceOrientationEvent && typeof window.DeviceOrientationEvent.requestPermission !== 'function') {
+    window.addEventListener('deviceorientation', (e) => {
+      if (!scene || e.gamma === null || e.beta === null) return;
+      const gamma = Math.max(-20, Math.min(20, e.gamma));
+      const beta = Math.max(-20, Math.min(20, e.beta - 45));
+      scene.style.transform = `perspective(1000px) rotateY(${gamma * 0.35}deg) rotateX(${-beta * 0.35}deg)`;
+    }, { passive: true });
+  }
+
+  // 3. Apertura del lightbox al hacer clic o presionar Enter en la foto
+  const openLightbox = () => {
+    if (!lightbox) return;
+    lightbox.style.display = 'flex';
+    void lightbox.offsetWidth; // forzar reflow
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    lightbox.classList.remove('is-open');
+    setTimeout(() => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 350);
+  };
+
+  photoHolder.addEventListener('click', openLightbox);
+  photoHolder.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openLightbox();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (backdrop) backdrop.addEventListener('click', closeLightbox);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && lightbox.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+}
+

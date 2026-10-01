@@ -115,21 +115,61 @@
 
   <main class="main-content">
 
-    <!-- SECCIÓN 1: HERO PORTADA -->
-    <section class="hero-section">
+    <!-- SECCIÓN 1: HERO PORTADA CON SOBRE EDITORIAL Y FOTO DE LOS NOVIOS -->
+    <section class="hero-section" id="hero">
+      <!-- Textura de papel verjurado y grabado de arquitectura de fondo -->
+      <div class="hero-paper-texture" aria-hidden="true"></div>
+      <div class="hero-castle-watermark" aria-hidden="true">
+        <img src="assets/images/castle-background.webp" alt="" class="castle-watermark-img" loading="eager">
+      </div>
+
       <div class="hero-content">
-        <div class="monogram-crest" aria-hidden="true">
-          <span class="monogram-text">E & M</span>
-        </div>
+        <!-- Subtítulo editorial -->
         <p class="hero-subtitle">Nuestra Boda</p>
-        <h1 class="couple-names">Edgar Enríquez <span>&</span> Mariela Cortez</h1>
-        <p class="couple-full-names">Edgar Enríquez Nazate &bull; Mariela Cortez Lara</p>
+
+        <!-- ESCENARIO DEL SOBRE NUPCIAL CON FOTO FLOTANTE Y MOVIMIENTO -->
+        <div class="hero-envelope-stage" id="hero-envelope-stage" role="region" aria-label="Fotografía de Edgar y Mariela en el sobre de invitación">
+          <div class="envelope-scene">
+            <!-- 1. Fondo interior del sobre en terciopelo vino tinto -->
+            <img src="assets/images/envelope-background.webp" alt="" class="env-back-img" aria-hidden="true" loading="eager">
+
+            <!-- 2. Fotografía estilo Polaroid con movimiento flotante y efecto interactivo -->
+            <div class="env-photo-holder is-floating" id="hero-photo-card" role="button" tabindex="0" aria-label="Ver fotografía de Edgar y Mariela en grande" title="Haz clic para ampliar la fotografía">
+              <div class="env-photo-polaroid">
+                <img src="assets/images/hero.jpg" alt="Edgar Enríquez y Mariela Cortez" class="env-photo-img" loading="eager">
+                <div class="photo-shimmer" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- 3. Ramillete botánico de peonías vino y flores crema -->
+            <div class="env-flowers-holder" aria-hidden="true">
+              <img src="assets/images/flower2-decoration.webp" alt="" class="env-flowers-img" loading="eager">
+            </div>
+
+            <!-- 4. Solapa frontal con sello de lacre dorado con corazón -->
+            <img src="assets/images/envelope-cover.webp" alt="" class="env-cover-img" aria-hidden="true" loading="eager">
+          </div>
+        </div>
+
+        <!-- Nombres de los novios con tipografía de lujo -->
+        <div class="couple-names-wrapper">
+          <h1 class="couple-names">
+            <span class="first-name">Edgar</span>
+            <span class="ampersand">&amp;</span>
+            <span class="first-name">Mariela</span>
+          </h1>
+          <p class="couple-full-names">Edgar Enríquez Nazate &bull; Mariela Cortez Lara</p>
+        </div>
+
+        <!-- Fecha y lugar de la boda -->
         <div class="wedding-date-tag">
           <span>Sábado, 19 de Diciembre de 2026 &bull; Riobamba</span>
         </div>
+
+        <!-- Indicador de desplazamiento -->
         <div class="scroll-indicator" aria-hidden="true">
           <span>Desliza para ver los detalles</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </div>
@@ -379,6 +419,21 @@
       <div id="search-results-container" class="search-results-list" style="margin-top: 16px; max-height: 220px; overflow-y: auto; display: none;"></div>
     </div>
   </aside>
+
+  <!-- MODAL LIGHTBOX FOTOGRAFÍA NOVIOS -->
+  <div id="photo-lightbox-modal" class="photo-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fotografía de Edgar y Mariela" style="display: none;">
+    <div class="lightbox-overlay" id="lightbox-backdrop"></div>
+    <div class="lightbox-container">
+      <button type="button" class="lightbox-close-btn" id="btn-close-lightbox" aria-label="Cerrar imagen">&times;</button>
+      <div class="lightbox-card">
+        <img src="assets/images/hero.jpg" alt="Edgar Enríquez y Mariela Cortez en Riobamba" class="lightbox-full-img">
+        <div class="lightbox-footer">
+          <p class="lightbox-couple">Edgar &amp; Mariela</p>
+          <p class="lightbox-date">Nuestra Boda &bull; 19 de Diciembre de 2026 &bull; Riobamba</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script type="module" src="js/app.js"></script>
