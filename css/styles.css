@@ -4,37 +4,53 @@
    ========================================================================== */
 
 :root {
-  /* Paleta Cromática Oro & Champagne */
+  /* Paleta Cromática Vino Tinto & Borgoña Luxe (Inspirada en el Sobre y Minimalism Dark Red) */
+  --wine-900: #1a0305;
+  --wine-800: #2c0508;
+  --wine-750: #380a0e;
+  --wine-700: #460c11;
+  --wine-600: #511419; /* Tono insignia de la invitación */
+  --wine-500: #6e1a20;
+  --wine-400: #8c262e;
+  --wine-300: #b53843;
+  --wine-gradient: linear-gradient(135deg, #7a1d24 0%, #511419 50%, #300609 100%);
+  --wine-gradient-hero: linear-gradient(180deg, rgba(38, 4, 7, 0.62) 0%, rgba(51, 10, 14, 0.8) 100%);
+  --wine-gradient-soft: linear-gradient(135deg, rgba(81, 20, 25, 0.09) 0%, rgba(110, 26, 32, 0.03) 100%);
+  --wine-border: rgba(81, 20, 25, 0.22);
+  --wine-border-strong: rgba(81, 20, 25, 0.45);
+
+  /* Acentos Dorados Champán Nupciales */
   --gold-300: #F3E5C8;
-  --gold-400: #DFCA9B;
-  --gold-500: #C5A059;
+  --gold-400: #E2CCA0;
+  --gold-500: #C9A24A;
   --gold-600: #A88239;
   --gold-700: #7D5D1C;
-  --gold-gradient: linear-gradient(135deg, #F9ECCB 0%, #D4AF37 45%, #AA822A 100%);
-  --gold-gradient-soft: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(197,160,89,0.04) 100%);
-  --gold-border: rgba(197, 160, 89, 0.35);
+  --gold-gradient: linear-gradient(135deg, #F9ECCB 0%, #C9A24A 45%, #9E7422 100%);
+  --gold-gradient-soft: linear-gradient(135deg, rgba(201, 162, 74, 0.12) 0%, rgba(168, 130, 57, 0.04) 100%);
+  --gold-border: rgba(201, 162, 74, 0.32);
 
   /* Fondos y Neutros de Lujo */
-  --bg-body: #FAF7F2;
+  --bg-body: #FCF8F3;
   --bg-card: #FFFFFF;
-  --bg-card-translucent: rgba(255, 255, 255, 0.92);
-  --bg-elevated: #F3EDE2;
-  --bg-dark-accent: #1C1917;
+  --bg-card-translucent: rgba(255, 253, 250, 0.95);
+  --bg-elevated: #F7EEE4;
+  --bg-dark-accent: #2C0508;
 
   /* Textos y Contrastes (Cumple WCAG AA) */
-  --text-main: #23201D;
-  --text-secondary: #57524C;
-  --text-muted: #857F77;
+  --text-main: #330A0E;
+  --text-secondary: #5C2B30;
+  --text-muted: #8A5F64;
   --text-light: #FAF7F2;
   --text-gold: #966F23;
+  --text-wine: #511419;
 
   /* Estados y Acentos */
   --whatsapp-color: #128C7E;
   --whatsapp-hover: #075E54;
   --success-color: #2E7D32;
-  --shadow-subtle: 0 4px 20px rgba(40, 30, 15, 0.05);
-  --shadow-luxury: 0 16px 48px rgba(50, 40, 20, 0.09), 0 2px 8px rgba(50, 40, 20, 0.04);
-  --shadow-float: 0 12px 32px rgba(197, 160, 89, 0.25);
+  --shadow-subtle: 0 4px 20px rgba(81, 20, 25, 0.06);
+  --shadow-luxury: 0 16px 48px rgba(44, 5, 8, 0.11), 0 2px 8px rgba(44, 5, 8, 0.04);
+  --shadow-float: 0 12px 32px rgba(81, 20, 25, 0.28);
 
   /* Tipografías */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -86,8 +102,8 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-                    radial-gradient(circle at 90% 80%, rgba(197, 160, 89, 0.04) 0%, transparent 40%);
+  background-image: radial-gradient(circle at 10% 20%, rgba(81, 20, 25, 0.04) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(201, 162, 74, 0.04) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
@@ -121,13 +137,13 @@ body::before {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 252, 248, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--gold-border);
-  box-shadow: var(--shadow-luxury);
+  border: 1px solid var(--wine-border);
+  box-shadow: 0 10px 30px rgba(44, 5, 8, 0.12), 0 2px 8px rgba(44, 5, 8, 0.04);
   max-width: 90vw;
 }
 
@@ -137,10 +153,10 @@ body::before {
   gap: 8px;
   background: transparent;
   border: none;
-  color: var(--text-main);
+  color: var(--text-wine);
   font-family: var(--font-sans);
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   padding: 8px 14px;
   border-radius: var(--radius-full);
@@ -151,12 +167,12 @@ body::before {
 }
 
 .control-btn:hover {
-  background: var(--gold-gradient-soft);
-  color: var(--gold-600);
+  background: var(--wine-gradient-soft);
+  color: var(--wine-500);
 }
 
 .control-btn:focus-visible {
-  outline: 2px solid var(--gold-500);
+  outline: 2px solid var(--wine-500);
   outline-offset: 2px;
 }
 
@@ -171,7 +187,7 @@ body::before {
 .music-bars span {
   width: 2px;
   height: 100%;
-  background: var(--gold-500);
+  background: var(--wine-600);
   border-radius: 1px;
 }
 
@@ -203,7 +219,7 @@ body::before {
   align-items: center;
   text-align: center;
   padding: 100px 20px 60px;
-  background: linear-gradient(180deg, rgba(20, 18, 16, 0.45) 0%, rgba(20, 18, 16, 0.7) 100%),
+  background: var(--wine-gradient-hero),
               url('../assets/images/hero.jpg') center/cover no-repeat;
   color: var(--text-light);
 }
@@ -221,11 +237,11 @@ body::before {
   width: 80px;
   height: 80px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(229, 201, 130, 0.45);
+  background: rgba(81, 20, 25, 0.55);
   backdrop-filter: blur(8px);
   margin-bottom: 24px;
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 32px rgba(81, 20, 25, 0.65), 0 0 16px rgba(201, 162, 74, 0.25);
 }
 
 .monogram-text {
@@ -251,7 +267,7 @@ body::before {
   font-weight: 400;
   line-height: 1.1;
   margin-bottom: 8px;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
 }
 
 .couple-names span {
@@ -268,7 +284,7 @@ body::before {
   font-size: clamp(0.75rem, 1.8vw, 0.92rem);
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold-200);
+  color: var(--gold-300);
   margin-top: 4px;
   margin-bottom: 14px;
   font-weight: 400;
@@ -286,10 +302,11 @@ body::before {
   text-transform: uppercase;
   margin-top: 16px;
   padding: 8px 24px;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
+  background: rgba(44, 5, 8, 0.65);
+  backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
-  border: 1px solid rgba(243, 229, 200, 0.3);
+  border: 1px solid rgba(201, 162, 74, 0.4);
+  color: var(--gold-300);
 }
 
 .scroll-indicator {
@@ -326,7 +343,7 @@ body::before {
 .guest-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-luxury);
   width: 100%;
   max-width: 680px;
@@ -337,7 +354,7 @@ body::before {
   transition: var(--transition-smooth);
 }
 
-/* Borde interior dorado tipo carta de gala */
+/* Borde interior vino/dorado tipo carta de gala */
 .guest-card::before {
   content: '';
   position: absolute;
@@ -345,7 +362,7 @@ body::before {
   left: 12px;
   right: 12px;
   bottom: 12px;
-  border: 1px solid rgba(197, 160, 89, 0.2);
+  border: 1px solid rgba(81, 20, 25, 0.16);
   border-radius: calc(var(--radius-lg) - 6px);
   pointer-events: none;
 }
@@ -354,9 +371,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--gold-gradient-soft);
-  color: var(--gold-600);
-  border: 1px solid var(--gold-border);
+  background: var(--wine-gradient-soft);
+  color: var(--wine-600);
+  border: 1px solid var(--wine-border);
   padding: 6px 18px;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
@@ -369,7 +386,7 @@ body::before {
 .guest-greeting {
   font-family: var(--font-script);
   font-size: 2.4rem;
-  color: var(--gold-500);
+  color: var(--wine-500);
   margin-bottom: 4px;
 }
 
@@ -377,7 +394,7 @@ body::before {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 4vw, 2.7rem);
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--wine-900);
   line-height: 1.25;
   margin-bottom: 16px;
   word-wrap: break-word;
@@ -401,7 +418,7 @@ body::before {
 
 .detail-pill {
   background: var(--bg-elevated);
-  border: 1px solid rgba(197, 160, 89, 0.2);
+  border: 1px solid var(--wine-border);
   border-radius: var(--radius-md);
   padding: 16px 20px;
   text-align: center;
@@ -410,7 +427,7 @@ body::before {
 
 .detail-pill:hover {
   transform: translateY(-2px);
-  border-color: var(--gold-500);
+  border-color: var(--wine-600);
 }
 
 .detail-label {
@@ -426,7 +443,7 @@ body::before {
   font-family: var(--font-serif);
   font-size: 1.35rem;
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--wine-900);
 }
 
 .guest-cta-group {
@@ -459,14 +476,16 @@ body::before {
 }
 
 .btn-primary {
-  background: var(--gold-gradient);
-  color: #FFFFFF;
-  box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
+  background: var(--wine-gradient);
+  color: #FFF6EE;
+  border: 1px solid rgba(201, 162, 74, 0.35);
+  box-shadow: 0 4px 18px rgba(81, 20, 25, 0.38);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.45);
+  background: linear-gradient(135deg, #8a2128 0%, #60171d 50%, #36070a 100%);
+  box-shadow: 0 8px 24px rgba(81, 20, 25, 0.5);
 }
 
 .btn-primary:active {
@@ -475,12 +494,13 @@ body::before {
 
 .btn-outline {
   background: transparent;
-  color: var(--gold-600);
-  border: 1px solid var(--gold-500);
+  color: var(--wine-600);
+  border: 1px solid var(--wine-600);
 }
 
 .btn-outline:hover {
-  background: var(--gold-gradient-soft);
+  background: var(--wine-gradient-soft);
+  color: var(--wine-500);
   transform: translateY(-2px);
 }
 
@@ -497,7 +517,7 @@ body::before {
 }
 
 .btn:focus-visible {
-  outline: 3px solid var(--gold-400);
+  outline: 3px solid var(--wine-400);
   outline-offset: 2px;
 }
 
@@ -514,7 +534,7 @@ body::before {
   font-size: 0.78rem;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--gold-600);
+  color: var(--wine-500);
   font-weight: 600;
   margin-bottom: 8px;
   display: block;
@@ -525,7 +545,7 @@ body::before {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 500;
   margin-bottom: 32px;
-  color: var(--text-main);
+  color: var(--wine-900);
 }
 
 .countdown-grid {
@@ -539,7 +559,7 @@ body::before {
 
 .countdown-box {
   background: var(--bg-card);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-subtle);
   border-radius: var(--radius-md);
   padding: 18px 24px;
@@ -551,7 +571,7 @@ body::before {
   font-family: var(--font-serif);
   font-size: 2.8rem;
   font-weight: 600;
-  color: var(--gold-600);
+  color: var(--wine-600);
   line-height: 1;
   display: block;
   margin-bottom: 4px;
@@ -583,7 +603,7 @@ body::before {
 .location-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-luxury);
   padding: 40px 32px;
   text-align: center;
@@ -595,25 +615,26 @@ body::before {
 
 .location-card:hover {
   transform: translateY(-4px);
+  border-color: var(--wine-border-strong);
 }
 
 .location-icon-wrapper {
   width: 64px;
   height: 64px;
   border-radius: var(--radius-full);
-  background: var(--gold-gradient-soft);
-  border: 1px solid var(--gold-border);
+  background: var(--wine-gradient-soft);
+  border: 1px solid var(--wine-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-600);
+  color: var(--wine-600);
   margin-bottom: 20px;
 }
 
 .location-type {
   font-family: var(--font-script);
   font-size: 2.2rem;
-  color: var(--gold-500);
+  color: var(--wine-500);
   margin-bottom: 4px;
 }
 
@@ -621,6 +642,7 @@ body::before {
   font-family: var(--font-serif);
   font-size: 1.6rem;
   font-weight: 600;
+  color: var(--wine-900);
   margin-bottom: 12px;
 }
 
@@ -628,8 +650,9 @@ body::before {
   display: inline-block;
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--gold-700);
+  color: var(--wine-600);
   background: var(--bg-elevated);
+  border: 1px solid var(--wine-border);
   padding: 4px 16px;
   border-radius: var(--radius-full);
   margin-bottom: 16px;
@@ -664,7 +687,7 @@ body::before {
   bottom: 0;
   left: 50%;
   width: 2px;
-  background: var(--gold-border);
+  background: linear-gradient(180deg, var(--wine-border), var(--gold-border), var(--wine-border));
   transform: translateX(-50%);
 }
 
@@ -686,9 +709,10 @@ body::before {
   width: 18px;
   height: 18px;
   background: var(--bg-card);
-  border: 3px solid var(--gold-500);
+  border: 3px solid var(--wine-600);
   border-radius: var(--radius-full);
   z-index: 2;
+  box-shadow: 0 0 10px rgba(81, 20, 25, 0.3);
 }
 
 .timeline-content {
@@ -696,7 +720,7 @@ body::before {
   background: var(--bg-card);
   padding: 20px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-subtle);
   text-align: center;
 }
@@ -705,7 +729,7 @@ body::before {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 1.2rem;
-  color: var(--gold-600);
+  color: var(--wine-600);
   margin-bottom: 4px;
 }
 
@@ -729,7 +753,7 @@ body::before {
 .dress-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-luxury);
   padding: 48px 32px;
 }
@@ -738,7 +762,7 @@ body::before {
   font-family: var(--font-serif);
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--wine-900);
   margin-bottom: 12px;
 }
 
@@ -780,8 +804,9 @@ body::before {
 .dress-note {
   font-size: 0.85rem;
   font-style: italic;
-  color: var(--gold-700);
+  color: var(--wine-600);
   background: var(--bg-elevated);
+  border: 1px solid var(--wine-border);
   padding: 10px 20px;
   border-radius: var(--radius-full);
   display: inline-block;
@@ -801,7 +826,7 @@ body::before {
 .bank-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-luxury);
   padding: 40px 32px;
   margin-top: 32px;
@@ -813,7 +838,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  border-bottom: 1px dashed var(--gold-border);
+  border-bottom: 1px dashed var(--wine-border);
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -839,19 +864,20 @@ body::before {
 
 .btn-copy {
   background: var(--bg-elevated);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  color: var(--gold-700);
+  color: var(--wine-600);
   transition: var(--transition-smooth);
 }
 
 .btn-copy:hover {
-  background: var(--gold-500);
+  background: var(--wine-600);
   color: #FFFFFF;
+  border-color: var(--wine-600);
 }
 
 /* ==========================================================================
@@ -870,7 +896,7 @@ body::before {
   background: var(--bg-card);
   padding: 48px 36px;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   box-shadow: var(--shadow-luxury);
 }
 
@@ -912,7 +938,7 @@ body::before {
   padding: 80px 20px 100px;
   text-align: center;
   background: var(--bg-body);
-  border-top: 1px solid var(--gold-border);
+  border-top: 1px solid var(--wine-border);
 }
 
 .footer-quote {
@@ -928,7 +954,7 @@ body::before {
   font-size: 0.88rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold-600);
+  color: var(--wine-600);
   font-weight: 600;
 }
 
@@ -942,7 +968,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(18, 16, 14, 0.65);
+  background: rgba(38, 4, 7, 0.72);
   backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
@@ -962,8 +988,8 @@ body::before {
 .modal-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--gold-border);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--wine-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 520px;
   padding: 36px 28px;
@@ -996,13 +1022,13 @@ body::before {
 
 .modal-close:hover {
   background: var(--bg-elevated);
-  color: var(--text-main);
+  color: var(--wine-600);
 }
 
 .modal-input {
   width: 100%;
   padding: 14px 20px;
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--wine-border);
   border-radius: var(--radius-full);
   font-family: var(--font-sans);
   font-size: 1.1rem;
@@ -1010,11 +1036,12 @@ body::before {
   margin: 20px 0;
   outline: none;
   background: var(--bg-body);
+  color: var(--wine-900);
 }
 
 .modal-input:focus {
-  border-color: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+  border-color: var(--wine-600);
+  box-shadow: 0 0 0 3px rgba(81, 20, 25, 0.18);
 }
 
 .preset-pills {
@@ -1027,7 +1054,8 @@ body::before {
 
 .preset-pill {
   background: var(--bg-elevated);
-  border: 1px solid rgba(197, 160, 89, 0.3);
+  border: 1px solid var(--wine-border);
+  color: var(--wine-600);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
@@ -1036,7 +1064,7 @@ body::before {
 }
 
 .preset-pill:hover {
-  background: var(--gold-500);
+  background: var(--wine-600);
   color: #FFFFFF;
 }
 
@@ -1049,13 +1077,13 @@ body::before {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--bg-dark-accent);
+  background: var(--wine-900);
   color: var(--text-light);
   padding: 12px 24px;
   border-radius: var(--radius-full);
   font-size: 0.88rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--gold-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--wine-border-strong);
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;

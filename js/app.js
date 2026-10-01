@@ -382,7 +382,12 @@ function initPetalsCanvas() {
       y: Math.random() * height,
       r: Math.random() * 3 + 2,
       d: Math.random() * petalCount,
-      color: Math.random() > 0.4 ? 'rgba(212, 175, 55, 0.45)' : 'rgba(245, 230, 210, 0.5)',
+      color: (() => {
+        const rand = Math.random();
+        if (rand < 0.45) return 'rgba(110, 26, 32, 0.42)'; // Pétalo vino tinto
+        if (rand < 0.75) return 'rgba(201, 162, 74, 0.45)'; // Destello oro champán
+        return 'rgba(247, 238, 228, 0.55)'; // Destello marfil suave
+      })(),
       tilt: Math.random() * 10 - 10,
       tiltInc: Math.random() * 0.05 + 0.01
     });
