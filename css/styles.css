@@ -1,0 +1,1158 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO - INVITACIÓN DE BODA LUXE
+   Tipografía: Cormorant Garamond + Pinyon Script + Montserrat
+   ========================================================================== */
+
+:root {
+  /* Paleta Cromática Oro & Champagne */
+  --gold-300: #F3E5C8;
+  --gold-400: #DFCA9B;
+  --gold-500: #C5A059;
+  --gold-600: #A88239;
+  --gold-700: #7D5D1C;
+  --gold-gradient: linear-gradient(135deg, #F9ECCB 0%, #D4AF37 45%, #AA822A 100%);
+  --gold-gradient-soft: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(197,160,89,0.04) 100%);
+  --gold-border: rgba(197, 160, 89, 0.35);
+
+  /* Fondos y Neutros de Lujo */
+  --bg-body: #FAF7F2;
+  --bg-card: #FFFFFF;
+  --bg-card-translucent: rgba(255, 255, 255, 0.92);
+  --bg-elevated: #F3EDE2;
+  --bg-dark-accent: #1C1917;
+
+  /* Textos y Contrastes (Cumple WCAG AA) */
+  --text-main: #23201D;
+  --text-secondary: #57524C;
+  --text-muted: #857F77;
+  --text-light: #FAF7F2;
+  --text-gold: #966F23;
+
+  /* Estados y Acentos */
+  --whatsapp-color: #128C7E;
+  --whatsapp-hover: #075E54;
+  --success-color: #2E7D32;
+  --shadow-subtle: 0 4px 20px rgba(40, 30, 15, 0.05);
+  --shadow-luxury: 0 16px 48px rgba(50, 40, 20, 0.09), 0 2px 8px rgba(50, 40, 20, 0.04);
+  --shadow-float: 0 12px 32px rgba(197, 160, 89, 0.25);
+
+  /* Tipografías */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Pinyon Script', cursive;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Radios */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transiciones */
+  --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset y Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Fondo decorativo con textura sutil */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(197, 160, 89, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Canvas de pétalos sutiles */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR FLOTANTE & CONTROLES
+   ========================================================================== */
+
+.top-bar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+  max-width: 90vw;
+}
+
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.control-btn:hover {
+  background: var(--gold-gradient-soft);
+  color: var(--gold-600);
+}
+
+.control-btn:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 2px;
+}
+
+/* Animación del ecualizador musical */
+.music-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+
+.music-bars span {
+  width: 2px;
+  height: 100%;
+  background: var(--gold-500);
+  border-radius: 1px;
+}
+
+.is-playing .music-bars span:nth-child(1) {
+  animation: equalize 1s infinite alternate ease-in-out;
+}
+.is-playing .music-bars span:nth-child(2) {
+  animation: equalize 1.2s infinite alternate ease-in-out 0.2s;
+}
+.is-playing .music-bars span:nth-child(3) {
+  animation: equalize 0.8s infinite alternate ease-in-out 0.4s;
+}
+
+@keyframes equalize {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 20px 60px;
+  background: linear-gradient(180deg, rgba(20, 18, 16, 0.45) 0%, rgba(20, 18, 16, 0.7) 100%),
+              url('../assets/images/hero.jpg') center/cover no-repeat;
+  color: var(--text-light);
+}
+
+.hero-content {
+  max-width: 780px;
+  margin: 0 auto;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.monogram-crest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  margin-bottom: 24px;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.monogram-text {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  color: var(--gold-300);
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 5px;
+  color: var(--gold-300);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.couple-names {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+.couple-names span {
+  font-family: var(--font-script);
+  font-size: clamp(3.2rem, 8vw, 5.8rem);
+  color: var(--gold-300);
+  display: inline-block;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.wedding-date-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  letter-spacing: 3px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 16px;
+  padding: 8px 24px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(243, 229, 200, 0.3);
+}
+
+.scroll-indicator {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ==========================================================================
+   SECCIÓN: TARJETA DE INVITADO PERSONALIZADA (CORE FEATURE)
+   ========================================================================== */
+
+.guest-section {
+  padding: 80px 20px 60px;
+  display: flex;
+  justify-content: center;
+  margin-top: -60px;
+  position: relative;
+  z-index: 10;
+}
+
+.guest-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+  width: 100%;
+  max-width: 680px;
+  padding: 48px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+/* Borde interior dorado tipo carta de gala */
+.guest-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: calc(var(--radius-lg) - 6px);
+  pointer-events: none;
+}
+
+.invitation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold-gradient-soft);
+  color: var(--gold-600);
+  border: 1px solid var(--gold-border);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.guest-greeting {
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  color: var(--gold-500);
+  margin-bottom: 4px;
+}
+
+.guest-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+}
+
+.guest-message {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+.guest-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.detail-pill {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.detail-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-500);
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.guest-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   BOTONES Y ESTADOS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  min-height: 48px;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(197, 160, 89, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold-600);
+  border: 1px solid var(--gold-500);
+}
+
+.btn-outline:hover {
+  background: var(--gold-gradient-soft);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: var(--whatsapp-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold-400);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   SECCIÓN: CONTADOR REGRESIVO (COUNTDOWN)
+   ========================================================================== */
+
+.countdown-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-tag {
+  font-size: 0.78rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500;
+  margin-bottom: 32px;
+  color: var(--text-main);
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.countdown-box {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 24px;
+  min-width: 100px;
+  flex: 1;
+}
+
+.countdown-number {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--gold-600);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   SECCIÓN: UBICACIONES (CEREMONIA Y RECEPCIÓN)
+   ========================================================================== */
+
+.locations-section {
+  padding: 80px 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.location-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.location-card:hover {
+  transform: translateY(-4px);
+}
+
+.location-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--gold-gradient-soft);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-600);
+  margin-bottom: 20px;
+}
+
+.location-type {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--gold-500);
+  margin-bottom: 4px;
+}
+
+.location-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.location-time {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gold-700);
+  background: var(--bg-elevated);
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.location-address {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   SECCIÓN: CRONOGRAMA / ITINERARIO
+   ========================================================================== */
+
+.itinerary-section {
+  padding: 80px 20px;
+  background: var(--bg-elevated);
+}
+
+.timeline {
+  max-width: 640px;
+  margin: 40px auto 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--gold-border);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: var(--bg-card);
+  border: 3px solid var(--gold-500);
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+.timeline-content {
+  width: 44%;
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-subtle);
+  text-align: center;
+}
+
+.timeline-time {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--gold-600);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   SECCIÓN: CÓDIGO DE VESTIMENTA (DRESS CODE)
+   ========================================================================== */
+
+.dress-code-section {
+  padding: 80px 20px;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.dress-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+  padding: 48px 32px;
+}
+
+.dress-badge {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.dress-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.color-palette-title {
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.swatches-grid {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.swatch-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+
+.dress-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--gold-700);
+  background: var(--bg-elevated);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   SECCIÓN: MESA DE REGALOS & DATOS BANCARIOS
+   ========================================================================== */
+
+.gifts-section {
+  padding: 80px 20px;
+  max-width: 840px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bank-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+  padding: 40px 32px;
+  margin-top: 32px;
+  text-align: left;
+}
+
+.bank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--gold-border);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bank-row:last-child {
+  border-bottom: none;
+}
+
+.bank-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bank-value {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.btn-copy {
+  background: var(--bg-elevated);
+  border: 1px solid var(--gold-border);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--gold-700);
+  transition: var(--transition-smooth);
+}
+
+.btn-copy:hover {
+  background: var(--gold-500);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   SECCIÓN: RSVP / CONFIRMACIÓN
+   ========================================================================== */
+
+.rsvp-section {
+  padding: 80px 20px;
+  background: var(--bg-elevated);
+  text-align: center;
+}
+
+.rsvp-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  padding: 48px 36px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow-luxury);
+}
+
+.rsvp-status-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+}
+
+.rsvp-status-badge.confirmed {
+  background: #E8F5E9;
+  color: var(--success-color);
+  border: 1px solid #C8E6C9;
+}
+
+.rsvp-status-badge.declined {
+  background: #FFEBEE;
+  color: #C62828;
+  border: 1px solid #FFCDD2;
+}
+
+.rsvp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.wedding-footer {
+  padding: 80px 20px 100px;
+  text-align: center;
+  background: var(--bg-body);
+  border-top: 1px solid var(--gold-border);
+}
+
+.footer-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.footer-hashtag {
+  font-size: 0.88rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MODAL DE BÚSQUEDA / CAMBIO DE INVITADO
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 520px;
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.modal-backdrop.is-active .modal-card {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.modal-close:hover {
+  background: var(--bg-elevated);
+  color: var(--text-main);
+}
+
+.modal-input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 20px 0;
+  outline: none;
+  background: var(--bg-body);
+}
+
+.modal-input:focus {
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+}
+
+.preset-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.preset-pill {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.preset-pill:hover {
+  background: var(--gold-500);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   BARRA FLOTANTE DE PRUEBAS RÁPIDAS (DEMO TOOLBAR)
+   ========================================================================== */
+
+.demo-toolbar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(28, 25, 23, 0.95);
+  color: #FFFFFF;
+  backdrop-filter: blur(10px);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  z-index: 99;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.demo-toolbar select {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.demo-toolbar select option {
+  background: #1C1917;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   NOTIFICACIÓN TOAST FLOTANTE
+   ========================================================================== */
+
+.toast-notification {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg-dark-accent);
+  color: var(--text-light);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gold-border);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1100;
+}
+
+.toast-notification.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES RESPONSIVAS (xs a xl)
+   ========================================================================== */
+
+/* xs: <375px */
+@media (max-width: 374px) {
+  .guest-card {
+    padding: 32px 18px;
+  }
+  .countdown-box {
+    min-width: 70px;
+    padding: 12px 8px;
+  }
+  .countdown-number {
+    font-size: 2rem;
+  }
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-item, .timeline-item:nth-child(odd) {
+    flex-direction: row;
+    padding-left: 44px;
+  }
+  .timeline-dot {
+    left: 20px;
+  }
+  .timeline-content {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* sm: 375px - 639px */
+@media (max-width: 639px) {
+  .timeline::before {
+    left: 24px;
+  }
+  .timeline-item, .timeline-item:nth-child(odd) {
+    flex-direction: row;
+    padding-left: 52px;
+  }
+  .timeline-dot {
+    left: 24px;
+  }
+  .timeline-content {
+    width: 100%;
+    text-align: left;
+  }
+  .demo-toolbar {
+    width: 92%;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
