@@ -1,0 +1,127 @@
+/**
+ * LISTA DE INVITADOS DE LA BODA
+ *
+ * Edita únicamente este archivo para agregar, modificar o eliminar invitados.
+ *
+ * 1. CONSTANTES DE NOTA ESPECIAL POR CATEGORÍA:
+ *    Usa cualquiera de estas constantes en `customNote` según la relación con el invitado:
+ *    - `NOTA_HERMANOS`  : Para hermanos y hermanas de los novios
+ *    - `NOTA_FAMILIA`   : Para padres, núcleos familiares cercanos
+ *    - `NOTA_PARIENTES` : Para tíos, primos y parientes
+ *    - `NOTA_AMIGOS`    : Para amigos y compañeros especiales
+ *    - `NOTA_PADRINOS`  : Para padrinos y madrinas de la boda
+ *    - `NOTA_ESPECIAL`  : Nota general de cortesía (valor por defecto)
+ *
+ * 2. LISTA `INVITADOS`:
+ *    Cada invitado solo necesita 3 campos:
+ *    - `id`         : Número del invitado para su enlace personalizado (ej. index.html?id=17)
+ *    - `fullName`   : Nombre tal como aparecerá en el sobre, en la tarjeta y en WhatsApp
+ *    - `customNote` : Constante de nota según el caso (ej. NOTA_HERMANOS, NOTA_FAMILIA, NOTA_AMIGOS...)
+ */
+
+export const NOTA_HERMANOS =
+  "Crecimos compartiendo sueños, risas y los mejores recuerdos de la vida. Hoy, en el día más importante de nuestra historia, no podríamos dar este paso sin tu cariño y compañía. ¡Gracias por estar siempre a nuestro lado!";
+
+export const NOTA_FAMILIA =
+  "La familia es el regalo más grande que nos dio la vida. Tenemos el honor de invitarles a compartir con nosotros la alegría de unir nuestras vidas en matrimonio y celebrar juntos este momento inolvidable.";
+
+export const NOTA_PARIENTES =
+  "Llevamos en el corazón cada momento compartido en familia. Será una inmensa alegría contar con su presencia y su bendición en el día en que uniremos nuestras vidas para siempre.";
+
+export const NOTA_AMIGOS =
+  "Los amigos son la familia que se elige con el corazón. Gracias por ser parte de nuestra historia y acompañarnos en tantas aventuras; ¡prepárense para celebrar y brindar con nosotros en nuestra boda!";
+
+export const NOTA_PADRINOS =
+  "Gracias por su ejemplo, su cariño incondicional y por aceptar acompañarnos como guías en este nuevo camino que iniciamos juntos como esposos.";
+
+export const NOTA_ESPECIAL =
+  "Tenemos el honor de invitarte a compartir con nosotros la alegría de unir nuestras vidas en matrimonio. Tu presencia será el mejor regalo en este día tan especial.";
+
+export const INVITADOS = [
+  {
+    id: 1,
+    fullName: "Carlos Mendoza & Mariana Morales",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 2,
+    fullName: "Dr. Fernando Ruiz Alarcón",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 3,
+    fullName: "Roberto Gómez, Andrea Soto & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 4,
+    fullName: "Lic. Sofía Valenzuela & Acompañante",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 5,
+    fullName: "Dra. Valentina Castro Méndez",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 6,
+    fullName: "Familia Herrera Ramos",
+    customNote: NOTA_PARIENTES
+  },
+  {
+    id: 7,
+    fullName: "Ricardo Enríquez & Elena Paredes",
+    customNote: NOTA_PARIENTES
+  },
+  {
+    id: 8,
+    fullName: "Familia Cortez Villacreses",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 9,
+    fullName: "Alejandro Morales Vega",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 10,
+    fullName: "Daniel Salazar & Camila Domínguez",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 11,
+    fullName: "Gabriela Montalvo León",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 12,
+    fullName: "Andrés Zambrano, Lucía Cevallos & Hijos",
+    customNote: NOTA_PARIENTES
+  },
+  {
+    id: 13,
+    fullName: "Ing. Mateo Cárdenas & Valeria Noboa",
+    customNote: NOTA_ESPECIAL
+  },
+  {
+    id: 14,
+    fullName: "Sra. Patricia Delgado de Enríquez",
+    customNote: NOTA_PADRINOS
+  },
+  {
+    id: 15,
+    fullName: "Arq. Sebastián Aguirre & Carolina Peñafiel",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 16,
+    fullName: "Familia Mendoza Alcívar",
+    customNote: NOTA_PARIENTES
+  },
+  // Hermana del novio
+  {
+    id: 17,
+    fullName: "Nancy Magdalena Enríquez Nazate",
+    customNote: NOTA_HERMANOS
+  }
+];

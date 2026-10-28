@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boda de Edgar Enríquez & Mariela Cortez | Invitación Especial</title>
-  
+
   <!-- Metadatos para compartir en WhatsApp y Redes Sociales -->
   <meta name="description" content="Acompáñanos a celebrar la boda de Edgar Enríquez y Mariela Cortez en Riobamba.">
   <meta property="og:title" content="Boda de Edgar Enríquez & Mariela Cortez | Nuestra Boda">
-  <meta property="og:description" content="Tenemos el honor de invitarte a celebrar este día tan especial con nosotros.">
+  <meta property="og:description"
+    content="Tenemos el honor de invitarte a celebrar este día tan especial con nosotros.">
   <meta property="og:image" content="assets/images/hero.jpg">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
 
   <!-- Google Fonts de Alta Gama -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap"
+    rel="stylesheet">
 
   <!-- Estilos Principales -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
   <!-- SOBRE INTERACTIVO DE BIENVENIDA (Inspirado en ChungDoi / Minimalism Dark Red) -->
-  <aside id="envelope-overlay" class="envelope-overlay" role="dialog" aria-modal="true" aria-label="Sobre de Invitación de Boda">
+  <aside id="envelope-overlay" class="envelope-overlay" role="dialog" aria-modal="true"
+    aria-label="Sobre de Invitación de Boda">
     <!-- Partículas ambientales de corazones y pétalos flotantes -->
     <div class="envelope-ambient-particles" aria-hidden="true">
       <span class="ambient-item a-1">♥</span>
@@ -46,7 +53,8 @@
       <!-- Sello de Lacre 3D con animación de pulso -->
       <div class="envelope-seal" aria-hidden="true" title="Sello de amor">
         <svg viewBox="0 0 24 24" class="seal-icon" fill="currentColor">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
         </svg>
       </div>
 
@@ -76,12 +84,12 @@
           <div class="envelope-guest-container">
             <p id="envelope-invitation-text" class="envelope-invitation-text">Les Invitamos Cordialmente</p>
             <div id="envelope-guest-badge" class="envelope-guest-badge" style="display: none;">
-              <span class="guest-to-label">Para:</span>
               <strong id="envelope-guest-name" class="envelope-guest-name">Familia & Amigos</strong>
             </div>
           </div>
 
-          <button id="btn-open-envelope" type="button" class="btn-open-envelope" aria-label="Abrir invitación y escuchar canción">
+          <button id="btn-open-envelope" type="button" class="btn-open-envelope"
+            aria-label="Abrir invitación y escuchar canción">
             <span class="btn-text">Abrir</span>
             <div class="btn-shine" aria-hidden="true"></div>
           </button>
@@ -93,23 +101,16 @@
   <!-- Canvas para animación sutil de partículas y pétalos dorados -->
   <canvas id="petals-canvas"></canvas>
 
-  <!-- Barra Superior Flotante: Audio & Buscador -->
+  <!-- Barra Superior Flotante: Audio -->
   <header class="top-bar">
-    <button id="music-toggle-btn" class="control-btn" aria-label="Reproducir o pausar música ambiental" title="Música de fondo">
+    <button id="music-toggle-btn" class="control-btn" aria-label="Reproducir o pausar música ambiental"
+      title="Música de fondo">
       <div class="music-bars" aria-hidden="true">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <span>Música</span>
-    </button>
-
-    <button id="btn-open-search" class="control-btn" aria-label="Buscar invitación por nombre" title="Buscar por nombre">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <span>Buscar por Nombre</span>
     </button>
   </header>
 
@@ -128,15 +129,19 @@
         <p class="hero-subtitle">Nuestra Boda</p>
 
         <!-- ESCENARIO DEL SOBRE NUPCIAL CON FOTO FLOTANTE Y MOVIMIENTO -->
-        <div class="hero-envelope-stage" id="hero-envelope-stage" role="region" aria-label="Fotografía de Edgar y Mariela en el sobre de invitación">
+        <div class="hero-envelope-stage" id="hero-envelope-stage" role="region"
+          aria-label="Fotografía de Edgar y Mariela en el sobre de invitación">
           <div class="envelope-scene">
             <!-- 1. Fondo interior del sobre en terciopelo vino tinto -->
-            <img src="assets/images/envelope-background.webp" alt="" class="env-back-img" aria-hidden="true" loading="eager">
+            <img src="assets/images/envelope-background.webp" alt="" class="env-back-img" aria-hidden="true"
+              loading="eager">
 
             <!-- 2. Fotografía estilo Polaroid con movimiento flotante y efecto interactivo -->
-            <div class="env-photo-holder is-floating" id="hero-photo-card" role="button" tabindex="0" aria-label="Ver fotografía de Edgar y Mariela en grande" title="Haz clic para ampliar la fotografía">
+            <div class="env-photo-holder is-floating" id="hero-photo-card" role="button" tabindex="0"
+              aria-label="Ver fotografía de Edgar y Mariela en grande" title="Haz clic para ampliar la fotografía">
               <div class="env-photo-polaroid">
-                <img src="assets/images/hero.jpg" alt="Edgar Enríquez y Mariela Cortez" class="env-photo-img" loading="eager">
+                <img src="assets/images/hero.jpg" alt="Edgar Enríquez y Mariela Cortez" class="env-photo-img"
+                  loading="eager">
                 <div class="photo-shimmer" aria-hidden="true"></div>
               </div>
             </div>
@@ -147,7 +152,8 @@
             </div>
 
             <!-- 4. Solapa frontal con sello de lacre dorado con corazón -->
-            <img src="assets/images/envelope-cover.webp" alt="" class="env-cover-img" aria-hidden="true" loading="eager">
+            <img src="assets/images/envelope-cover.webp" alt="" class="env-cover-img" aria-hidden="true"
+              loading="eager">
           </div>
         </div>
 
@@ -169,7 +175,8 @@
         <!-- Indicador de desplazamiento -->
         <div class="scroll-indicator" aria-hidden="true">
           <span>Desliza para ver los detalles</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </div>
@@ -180,10 +187,10 @@
     <section class="guest-section" id="invitacion" style="display: none;">
       <article class="guest-card">
         <div id="guest-badge" class="invitation-badge">Invitación de Honor</div>
-        
+
         <p id="guest-greeting" class="guest-greeting">Querida Familia</p>
         <h2 id="guest-name" class="guest-name">Familia & Amigos</h2>
-        
+
         <p id="guest-message" class="guest-message">
           Tenemos el enorme placer de invitarte a ser testigo y parte fundamental de nuestra historia de amor.
         </p>
@@ -200,7 +207,7 @@
     <section class="countdown-section">
       <span class="section-tag">Faltan tan solo</span>
       <h2 class="section-title">Cuenta Regresiva</h2>
-      
+
       <div class="countdown-grid">
         <div class="countdown-box">
           <span id="days" class="countdown-number">00</span>
@@ -232,18 +239,25 @@
         <!-- Ceremonia Religiosa -->
         <article class="location-card">
           <div class="location-icon-wrapper" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4" />
+              <path d="M10 4h4" />
+              <path d="m18 9-6-3-6 3v13h12V9Z" />
+              <path d="M6 13H2v9h4" />
+              <path d="M18 13h4v9h-4" />
+              <path d="M10 22v-4a2 2 0 1 1 4 0v4" />
             </svg>
           </div>
           <span class="location-type">Ceremonia Religiosa</span>
-          <h3 class="location-name">Iglesia San Antonio de Padua</h3>
-          <span class="location-time">17:00 Horas &bull; Loma de Quito</span>
+          <h3 class="location-name">Iglesia Católica Santa Faz</h3>
+          <span class="location-time">19:00 Horas &bull; Riobamba</span>
           <p class="location-address">
-            Argentinos y Gral. Juan Lavalle (frente al Parque 21 de Abril).<br>
-            Loma de Quito, Riobamba, Ecuador.
+            Riobamba, Ecuador.<br>
+            Te esperamos para compartir la bendición de nuestro matrimonio.
           </p>
-          <a href="https://www.google.com/maps/search/?api=1&query=Iglesia+de+San+Antonio+de+Padua+Loma+de+Quito+Riobamba" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <a href="https://www.google.com/maps/place/Iglesia+Cat%C3%B3lica+Santa+Faz/@-1.6626292,-78.6628345,18.26z/data=!4m6!3m5!1s0x91d307f4aa1ce46b:0x64923e01254cc491!8m2!3d-1.662155!4d-78.6625154!16s%2Fg%2F11hbg9v3yh?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Ver en Google Maps
           </a>
         </article>
@@ -251,20 +265,22 @@
         <!-- Recepción y Fiesta -->
         <article class="location-card">
           <div class="location-icon-wrapper" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 22h8"/>
-              <path d="M12 11v11"/>
-              <path d="m19 3-7 8-7-8Z"/>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 22h8" />
+              <path d="M12 11v11" />
+              <path d="m19 3-7 8-7-8Z" />
             </svg>
           </div>
           <span class="location-type">Recepción & Fiesta</span>
-          <h3 class="location-name">Hacienda Las Rosas</h3>
-          <span class="location-time">19:00 Horas</span>
+          <h3 class="location-name">Salón de Recepción</h3>
+          <span class="location-time">20:00 Horas &bull; Riobamba</span>
           <p class="location-address">
-            Carretera Campestre Km 4.5, Valle Dorado.<br>
-            Banquete de gala, cóctel y fiesta hasta el amanecer.
+            Sector Norte (Ref. Good Chicken Norte) &bull; Riobamba.<br>
+            Un espacio preparado con mucho cariño para celebrar, brindar y bailar juntos toda la noche.
           </p>
-          <a href="https://maps.google.com/?q=Hacienda+Las+Rosas" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <a href="https://www.google.com/maps/place/Good+Chicken+Norte/@-1.6486424,-78.6715764,19z/data=!3m1!4b1!4m6!3m5!1s0x91d30700045b9e3f:0xeae879dbcfae1467!8m2!3d-1.6486437!4d-78.6709327!16s%2Fg%2F11vrrc4s2w?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline">
             Ver en Google Maps
           </a>
         </article>
@@ -272,7 +288,7 @@
     </section>
 
     <!-- SECCIÓN 5: ITINERARIO / CRONOGRAMA -->
-    <section class="itinerary-section">
+    <section class="itinerary-section" id="itinerario">
       <div style="text-align: center;">
         <span class="section-tag">El Gran Día</span>
         <h2 class="section-title">Itinerario del Evento</h2>
@@ -282,40 +298,50 @@
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-content">
-            <div class="timeline-time">17:00 hrs</div>
-            <div class="timeline-title">Ceremonia Religiosa (Iglesia San Antonio de Padua)</div>
+            <div class="timeline-time">19:00 HRS</div>
+            <div class="timeline-title"><strong>Ceremonia Religiosa</strong></div>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0;">Bendición
+              matrimonial en la Iglesia Católica Santa Faz.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-content">
-            <div class="timeline-time">18:30 hrs</div>
-            <div class="timeline-title">Cóctel de Bienvenida & Fotografías</div>
+            <div class="timeline-time">20:00 HRS</div>
+            <div class="timeline-title"><strong>Recepción y Bienvenida</strong></div>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0;">Bienvenida a
+              nuestros invitados e inicio de nuestra celebración.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-content">
-            <div class="timeline-time">19:30 hrs</div>
-            <div class="timeline-title">Entrada de los Novios & Banquete</div>
+            <div class="timeline-time">20:45 HRS</div>
+            <div class="timeline-title"><strong>Sesión de Fotos</strong></div>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0;">Capturando
+              recuerdos inolvidables junto a nuestras familias e invitados.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-content">
-            <div class="timeline-time">21:30 hrs</div>
-            <div class="timeline-title">Brindis & Primer Baile</div>
+            <div class="timeline-time">21:30 HRS</div>
+            <div class="timeline-title"><strong>Brindis y Cena</strong></div>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0;">
+              Disfrutaremos juntos de una cena especial y el brindis por nuestro amor.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot" aria-hidden="true"></div>
           <div class="timeline-content">
-            <div class="timeline-time">22:30 hrs</div>
-            <div class="timeline-title">¡Gran Fiesta & Baile!</div>
+            <div class="timeline-time">22:30 HRS</div>
+            <div class="timeline-title"><strong>Primer Baile y Fiesta</strong></div>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-top: 4px; margin-bottom: 0;">Apertura de
+              pista y celebración junto a todos ustedes.</p>
           </div>
         </div>
       </div>
@@ -327,9 +353,9 @@
       <h2 class="section-title">Código de Vestimenta</h2>
 
       <article class="dress-card">
-        <h3 class="dress-badge">Rigurosa Etiqueta / Formal</h3>
+        <h3 class="dress-badge">Formal / Elegante</h3>
         <p class="dress-desc">
-          Queremos que luzcas espectacular en este día tan memorable. Hombres: Traje o esmoquin oscuro. Mujeres: Vestido largo de noche.
+          Viste formal con lo que te sientas cómodo y elegante para disfrutar y celebrar junto a nosotros.
         </p>
 
         <p class="color-palette-title">Paleta de colores sugerida</p>
@@ -347,43 +373,34 @@
       </article>
     </section>
 
-    <!-- SECCIÓN 7: CONFIRMACIÓN RSVP (FORMULARIO DE GOOGLE) -->
+    <!-- SECCIÓN 7: CONFIRMACIÓN RSVP (WHATSAPP) -->
     <section class="rsvp-section" id="rsvp">
       <div class="rsvp-card">
-        <span class="section-tag">Confirmación</span>
+        <span class="section-tag">Confirmación de Asistencia</span>
         <h2 class="section-title">¿Nos Acompañas?</h2>
-        
-        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1.02rem; line-height: 1.6; max-width: 540px; margin-left: auto; margin-right: auto;">
-          Por favor llena nuestro formulario oficial de confirmación antes del <strong>1 de Diciembre de 2026</strong> para registrar tu asistencia y ayudarnos con los preparativos.
+
+        <p
+          style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1.02rem; line-height: 1.6; max-width: 540px; margin-left: auto; margin-right: auto;">
+          Para nosotros tu presencia es muy importante. Por favor confírmanos si podrás acompañarnos hasta el <strong>20
+            de Noviembre de 2026</strong> directamente por WhatsApp para ayudarnos con la organización de nuestra boda.
         </p>
 
         <p id="rsvp-guest-info" style="font-weight: 500; margin-bottom: 22px; display: none;">
           Confirmando como: <span id="rsvp-guest-name" style="color: var(--wine-600); font-weight: 600;"></span>
         </p>
 
-        <div class="rsvp-actions" style="display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 440px; margin: 0 auto;">
-          <a id="btn-google-form" href="https://forms.google.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; padding: 14px 24px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
+        <div class="rsvp-actions"
+          style="display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 440px; margin: 0 auto;">
+          <a id="btn-whatsapp-contact"
+            href="https://wa.me/593983310033?text=%C2%A1Hola%20Edgar%20y%20Mariela!%20%F0%9F%91%8B%20Deseo%20confirmar%20mi%20asistencia%20a%20su%20boda."
+            target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+            style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; padding: 14px 24px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.184 1.564 5.938l-1.564 5.719 5.864-1.538c1.691.923 3.633 1.457 5.7 1.457 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z" />
             </svg>
-            Llenar Formulario de Confirmación
+            Confirmar por WhatsApp
           </a>
-
-          <div style="margin-top: 10px; text-align: center;">
-            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 8px;">
-              ¿Tienes dudas o requieres asistencia adicional?
-            </p>
-            <a id="btn-whatsapp-contact" href="https://wa.me/593983310033?text=Hola%20Edgar%20y%20Mariela%2C%20tengo%20una%20consulta%20sobre%20su%20boda" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 18px; display: inline-flex; align-items: center; gap: 8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.184 1.564 5.938l-1.564 5.719 5.864-1.538c1.691.923 3.633 1.457 5.7 1.457 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              Escribir al WhatsApp (+593 0983310033)
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -401,30 +418,13 @@
 
   </main>
 
-  <!-- MODAL: BUSCADOR POR NOMBRE DE INVITADO -->
-  <aside id="search-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <button id="btn-close-modal" class="modal-close" aria-label="Cerrar modal">&times;</button>
-      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 8px;">Buscar tu Invitación</h3>
-      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 18px;">
-        Ingresa tu nombre o apellido para cargar tu invitación personalizada:
-      </p>
-
-      <input type="text" id="modal-search-input" class="modal-input" placeholder="Ej: Manuel Navarro, Gómez, Mendoza..." aria-label="Nombre o apellido">
-
-      <button id="btn-search-submit" class="btn btn-primary" style="width: 100%;">
-        Buscar Mi Invitación
-      </button>
-
-      <div id="search-results-container" class="search-results-list" style="margin-top: 16px; max-height: 220px; overflow-y: auto; display: none;"></div>
-    </div>
-  </aside>
-
   <!-- MODAL LIGHTBOX FOTOGRAFÍA NOVIOS -->
-  <div id="photo-lightbox-modal" class="photo-lightbox-modal" role="dialog" aria-modal="true" aria-label="Fotografía de Edgar y Mariela" style="display: none;">
+  <div id="photo-lightbox-modal" class="photo-lightbox-modal" role="dialog" aria-modal="true"
+    aria-label="Fotografía de Edgar y Mariela" style="display: none;">
     <div class="lightbox-overlay" id="lightbox-backdrop"></div>
     <div class="lightbox-container">
-      <button type="button" class="lightbox-close-btn" id="btn-close-lightbox" aria-label="Cerrar imagen">&times;</button>
+      <button type="button" class="lightbox-close-btn" id="btn-close-lightbox"
+        aria-label="Cerrar imagen">&times;</button>
       <div class="lightbox-card">
         <img src="assets/images/hero.jpg" alt="Edgar Enríquez y Mariela Cortez en Riobamba" class="lightbox-full-img">
         <div class="lightbox-footer">
@@ -438,4 +438,5 @@
   <!-- Scripts -->
   <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

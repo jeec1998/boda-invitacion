@@ -1,14 +1,11 @@
-import { GUESTS_DATABASE, DEFAULT_GUEST, findGuest, searchGuestsByName } from './guests.js';
+import { GUESTS_DATABASE, DEFAULT_GUEST, GuestsDB, findGuest } from './guests.js';
 import { musicPlayer } from './music.js';
 
-// Enlace de Google Form para confirmación de asistencia (reemplázalo con la URL de tu formulario creado)
-export const GOOGLE_FORM_URL = "https://forms.google.com/";
-
-// Teléfono de los novios para consultas y contacto (+593 0983310033)
+// Teléfono de los novios para confirmación de asistencia y consultas (+593 0983310033)
 export const WEDDING_PHONE = "593983310033"; 
 
-// Fecha y hora del evento para el contador (Sábado 19 de Diciembre de 2026, 17:00 hrs)
-export const WEDDING_DATE = new Date("2026-12-19T17:00:00").getTime();
+// Fecha y hora del evento para el contador (Sábado 19 de Diciembre de 2026, 19:00 hrs)
+export const WEDDING_DATE = new Date("2026-12-19T19:00:00").getTime();
 
 // Estado actual
 let currentGuest = DEFAULT_GUEST;
@@ -103,7 +100,7 @@ function initGuestFromUrl() {
       currentGuest = {
         ...DEFAULT_GUEST,
         fullName: decodeURIComponent(guestQuery),
-        customNote: "Nos encantará contar con tu presencia en este momento tan especial."
+        customNote: DEFAULT_GUEST.customNote
       };
     }
     if (guestSection) guestSection.style.display = 'flex';
@@ -125,24 +122,28 @@ function initGuestFromUrl() {
 }
 
 /**
- * Renderiza los datos del invitado en la interfaz (sin mostrar pases ni mesas)
+ * Renderiza los datos del invitado en la interfaz (usando únicamente id, fullName y customNote)
  */
 export function renderGuest(guest) {
   currentGuest = guest;
+
+  const displayName = guest?.fullName || "Familia & Amigos";
+  const displayMessage =
+    guest?.customNote ||
+    "Tenemos el honor de invitarte a celebrar nuestra boda y ser testigo de nuestro amor.";
 
   const greetingEl = document.getElementById('guest-greeting');
   const nameEl = document.getElementById('guest-name');
   const messageEl = document.getElementById('guest-message');
   const badgeEl = document.getElementById('guest-badge');
   const rsvpNameEl = document.getElementById('rsvp-guest-name');
-  const googleFormBtn = document.getElementById('btn-google-form');
   const waContactBtn = document.getElementById('btn-whatsapp-contact');
 
-  if (greetingEl) greetingEl.textContent = guest.greeting || "Apreciable";
-  if (nameEl) nameEl.textContent = guest.fullName || "Familia & Amigos";
-  if (messageEl) messageEl.textContent = guest.customNote || "Tenemos el honor de invitarte a celebrar nuestra boda.";
+  if (greetingEl) greetingEl.textContent = "Con mucho cariño para";
+  if (nameEl) nameEl.textContent = displayName;
+  if (messageEl) messageEl.textContent = displayMessage;
   if (badgeEl) badgeEl.textContent = "Invitación de Honor";
-  if (rsvpNameEl) rsvpNameEl.textContent = guest.fullName || "Familia & Amigos";
+  if (rsvpNameEl) rsvpNameEl.textContent = displayName;
 
   // Actualizar también el sobre exterior si el usuario aún no lo ha abierto
   const envGuestBadge = document.getElementById('envelope-guest-badge');
@@ -151,7 +152,7 @@ export function renderGuest(guest) {
 
   if (guest && guest.fullName) {
     if (envGuestBadge) envGuestBadge.style.display = 'inline-flex';
-    if (envGuestName) envGuestName.textContent = guest.fullName;
+    if (envGuestName) envGuestName.textContent = displayName;
     if (envInvText) envInvText.textContent = "Tenemos el honor de invitar a:";
   } else {
     if (envGuestBadge) envGuestBadge.style.display = 'none';
@@ -159,16 +160,11 @@ export function renderGuest(guest) {
   }
 
   // Actualizar título de la pestaña del navegador
-  document.title = `Boda de Edgar Enríquez & Mariela Cortez | Invitación para ${guest.fullName}`;
+  document.title = `Boda de Edgar Enríquez & Mariela Cortez | Invitación para ${displayName}`;
 
-  // Actualizar enlace al Formulario de Google
-  if (googleFormBtn) {
-    googleFormBtn.href = GOOGLE_FORM_URL;
-  }
-
-  // Actualizar enlace de contacto directo a WhatsApp
+  // Actualizar enlace de confirmación directa por WhatsApp
   if (waContactBtn) {
-    const msg = encodeURIComponent(`¡Hola Edgar y Mariela! 👋 Les saluda ${guest.fullName}. Tengo una consulta sobre su boda.`);
+    const msg = encodeURIComponent(`¡Hola Edgar y Mariela! 👋 Les saluda ${displayName}. Deseo confirmar mi asistencia a su boda.`);
     waContactBtn.href = `https://wa.me/${WEDDING_PHONE}?text=${msg}`;
   }
 }
@@ -212,7 +208,7 @@ function initCountdown() {
 }
 
 /**
- * Controladores de música y modal de búsqueda por nombre
+ * Controlador de música ambiental
  */
 function initControls() {
   // Botón de Música (admite canción de entrada nupcial o sintetizador)
@@ -224,137 +220,6 @@ function initControls() {
       showToast(playing ? "🎵 Canción nupcial reproduciéndose" : "🔇 Música pausada");
     });
   }
-
-  // Modal de Búsqueda por Nombre
-  const openModalBtn = document.getElementById('btn-open-search');
-  const closeModalBtn = document.getElementById('btn-close-modal');
-  const modalBackdrop = document.getElementById('search-modal');
-  const searchInput = document.getElementById('modal-search-input');
-  const searchSubmitBtn = document.getElementById('btn-search-submit');
-  const resultsContainer = document.getElementById('search-results-container');
-
-  function openModal() {
-    if (modalBackdrop) modalBackdrop.classList.add('is-active');
-    if (resultsContainer) {
-      resultsContainer.style.display = 'none';
-      resultsContainer.innerHTML = '';
-    }
-    if (searchInput) {
-      searchInput.value = '';
-      setTimeout(() => searchInput.focus(), 100);
-    }
-  }
-
-  function closeModal() {
-    if (modalBackdrop) modalBackdrop.classList.remove('is-active');
-    if (resultsContainer) {
-      resultsContainer.style.display = 'none';
-      resultsContainer.innerHTML = '';
-    }
-  }
-
-  if (openModalBtn) openModalBtn.addEventListener('click', openModal);
-  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-  if (modalBackdrop) {
-    modalBackdrop.addEventListener('click', (e) => {
-      if (e.target === modalBackdrop) closeModal();
-    });
-  }
-
-  function selectGuest(guest) {
-    const guestSection = document.getElementById('invitacion');
-    if (guestSection) guestSection.style.display = 'flex';
-
-    const rsvpGuestContainer = document.getElementById('rsvp-guest-info');
-    if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'block';
-
-    renderGuest(guest);
-    updateUrlParam(guest.id);
-    closeModal();
-    showToast(`✨ Invitación cargada para: ${guest.fullName}`);
-    setTimeout(() => {
-      guestSection?.scrollIntoView({ behavior: 'smooth' });
-    }, 150);
-  }
-
-  function handleSearch() {
-    const val = searchInput?.value.trim();
-    if (!val) return;
-
-    const matches = searchGuestsByName(val);
-
-    if (matches.length === 1) {
-      selectGuest(matches[0]);
-    } else if (matches.length > 1) {
-      // Mostrar lista interactiva de nombres coincidentes
-      if (resultsContainer) {
-        resultsContainer.style.display = 'block';
-        resultsContainer.innerHTML = `
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 8px; text-align: left;">
-            Selecciona tu nombre de la lista:
-          </p>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            ${matches.map(g => `
-              <button type="button" class="btn btn-outline search-item-btn" data-id="${g.id}" style="text-align: left; justify-content: flex-start; padding: 10px 14px; font-size: 0.88rem; width: 100%;">
-                👤 <strong>${g.fullName}</strong>
-              </button>
-            `).join('')}
-          </div>
-        `;
-
-        resultsContainer.querySelectorAll('.search-item-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            const guest = findGuest(id);
-            if (guest) selectGuest(guest);
-          });
-        });
-      }
-    } else {
-      // Intentar coincidencia directa alternativa
-      const single = findGuest(val);
-      if (single && single.id !== 0) {
-        selectGuest(single);
-      } else {
-        if (resultsContainer) {
-          resultsContainer.style.display = 'block';
-          resultsContainer.innerHTML = `
-            <div style="background: rgba(198, 40, 40, 0.08); border: 1px solid rgba(198, 40, 40, 0.2); padding: 12px; border-radius: 8px; color: #C62828; font-size: 0.86rem; text-align: center;">
-              No se encontró una invitación para "<strong>${escapeHtml(val)}</strong>".<br>
-              <span style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; display: block;">
-                Verifica la ortografía de tu nombre o apellido.
-              </span>
-            </div>
-          `;
-        }
-        showToast(`No se encontró invitación para "${val}"`);
-      }
-    }
-  }
-
-  if (searchSubmitBtn) searchSubmitBtn.addEventListener('click', handleSearch);
-  if (searchInput) {
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSearch();
-    });
-  }
-}
-
-/**
- * Escapa caracteres HTML para seguridad
- */
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-/**
- * Actualiza el query param de la URL sin recargar la página
- */
-function updateUrlParam(id) {
-  const newUrl = `${window.location.pathname}?id=${id}`;
-  window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
 /**

@@ -888,6 +888,8 @@ body::before {
 
 .countdown-number {
   font-family: var(--font-serif);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
   font-size: 2.8rem;
   font-weight: 600;
   color: var(--wine-600);
@@ -969,6 +971,8 @@ body::before {
   display: inline-block;
   font-size: 0.88rem;
   font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
   color: var(--wine-600);
   background: var(--bg-elevated);
   border: 1px solid var(--wine-border);
@@ -1046,10 +1050,13 @@ body::before {
 
 .timeline-time {
   font-family: var(--font-serif);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
   font-weight: 600;
   font-size: 1.2rem;
+  letter-spacing: 0.04em;
   color: var(--wine-600);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .timeline-title {
@@ -1723,6 +1730,8 @@ body::before {
 
 .envelope-wedding-date {
   font-family: var(--font-serif);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
   font-size: 1.15rem;
   color: var(--env-wine-mid);
   letter-spacing: 0.04em;
