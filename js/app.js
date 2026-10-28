@@ -111,7 +111,7 @@ function initGuestFromUrl() {
     currentGuest = null;
     if (guestSection) guestSection.style.display = 'none';
     if (rsvpGuestContainer) rsvpGuestContainer.style.display = 'none';
-    document.title = "Boda de Edgar Enríquez & Mariela Cortez | Invitación Especial";
+    document.title = "Boda de Marcelo Enríquez & Mariela Cortez | Invitación Especial";
     
     // Configurar sobre en modo general
     const envGuestBadge = document.getElementById('envelope-guest-badge');
@@ -160,11 +160,11 @@ export function renderGuest(guest) {
   }
 
   // Actualizar título de la pestaña del navegador
-  document.title = `Boda de Edgar Enríquez & Mariela Cortez | Invitación para ${displayName}`;
+  document.title = `Boda de Marcelo Enríquez & Mariela Cortez | Invitación para ${displayName}`;
 
   // Actualizar enlace de confirmación directa por WhatsApp
   if (waContactBtn) {
-    const msg = encodeURIComponent(`¡Hola Edgar y Mariela! 👋 Les saluda ${displayName}. Deseo confirmar mi asistencia a su boda.`);
+    const msg = encodeURIComponent(`¡Hola Marcelo y Mariela! 👋 Les saluda ${displayName}. Deseo confirmar mi asistencia a su boda.`);
     waContactBtn.href = `https://wa.me/${WEDDING_PHONE}?text=${msg}`;
   }
 }
@@ -218,6 +218,14 @@ function initControls() {
       const playing = await musicPlayer.toggle();
       musicBtn.classList.toggle('is-playing', playing);
       showToast(playing ? "🎵 Canción nupcial reproduciéndose" : "🔇 Música pausada");
+    });
+  }
+
+  // Pausar música automáticamente al abrir WhatsApp para confirmar asistencia
+  const waContactBtn = document.getElementById('btn-whatsapp-contact');
+  if (waContactBtn) {
+    waContactBtn.addEventListener('click', () => {
+      musicPlayer.pauseForBackground();
     });
   }
 }

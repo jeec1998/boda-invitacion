@@ -2,18 +2,20 @@
  * REPRODUCTOR DE MÚSICA DE BODA
  * Soporta archivos de audio reales (MP3 / WAV para la canción de entrada de la novia / marcha nupcial)
  * con respaldo automático a Web Audio API (Canon / Piano) si el archivo de audio aún no se encuentra.
+ * Incluye pausa automática cuando la página pasa a segundo plano (ej. al abrir WhatsApp o cambiar de pestaña).
  */
 
 class RomanticAudioPlayer {
   constructor() {
     this.isPlaying = false;
+    this.wasPlayingBeforeBackground = false;
     this.activeMode = null; // 'audio-file' | 'synth'
-    
+
     // Archivo de audio principal: Thinking Out Loud (Ed Sheeran)
     this.audioElement = new Audio();
     this.audioElement.loop = true;
     this.audioElement.preload = "auto";
-    
+
     // Rutas candidatas: Local primero, respaldo a CDN de ChungDoi y WAV local
     this.candidateSources = [
       'assets/audio/thinking-out-loud.mp3',
@@ -38,13 +40,15 @@ class RomanticAudioPlayer {
       196.00, 246.94, 293.66, 392.00,
       220.00, 277.18, 329.63, 440.00
     ];
+
+    this.setupBackgroundVisibilityListeners();
   }
 
   setupAudioElement() {
     if (this.currentSourceIndex < this.candidateSources.length) {
       this.audioElement.src = this.candidateSources[this.currentSourceIndex];
     }
-    
+
     this.audioElement.addEventListener('error', () => {
       this.currentSourceIndex++;
       if (this.currentSourceIndex < this.candidateSources.length) {
@@ -58,6 +62,78 @@ class RomanticAudioPlayer {
         }
       }
     });
+  }
+
+  /**
+   * Configura los listeners para pausar automáticamente la música cuando la invitación
+   * pasa a segundo plano (cambio de pestaña, bloqueo de pantalla o apertura de WhatsApp)
+   * y reanudarla al regresar.
+   */
+  setupBackgroundVisibilityListeners() {
+    if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden || document.visibilityState === 'hidden') {
+          this.pauseForBackground();
+        } else if (document.visibilityState === 'visible') {
+          this.resumeFromBackground();
+        }
+      });
+    }
+
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+      window.addEventListener('pagehide', () => this.pauseForBackground());
+      window.addEventListener('blur', () => this.pauseForBackground());
+      window.addEventListener('focus', () => this.resumeFromBackground());
+    }
+  }
+
+  /**
+   * Sincroniza el estado visual del botón `#music-toggle-btn` en el DOM
+   */
+  syncButtonUI() {
+    if (typeof document !== 'undefined' && typeof document.getElementById === 'function') {
+      const musicBtn = document.getElementById('music-toggle-btn');
+      if (musicBtn && musicBtn.classList) {
+        musicBtn.classList.toggle('is-playing', this.isPlaying);
+      }
+    }
+  }
+
+  /**
+   * Pausa inmediatamente el audio sin olvidar si estaba sonando antes de ir a segundo plano
+   */
+  pauseForBackground() {
+    if (!this.isPlaying) return false;
+    this.wasPlayingBeforeBackground = true;
+    this.pause();
+    return true;
+  }
+
+  /**
+   * Reanuda la música si estaba reproduciéndose antes de ir a segundo plano
+   */
+  async resumeFromBackground() {
+    if (!this.wasPlayingBeforeBackground || this.isPlaying) return false;
+    this.wasPlayingBeforeBackground = false;
+    const playing = await this.playWithFadeIn(0.5, 600);
+    this.syncButtonUI();
+    return playing;
+  }
+
+  /**
+   * Detiene la reproducción activa inmediatamente (tanto archivo de audio como sintetizador)
+   */
+  pause() {
+    if (!this.isPlaying) return false;
+    this.isPlaying = false;
+    if (this.activeMode === 'audio-file') {
+      this.audioElement.pause();
+    } else {
+      this.stopSynth();
+    }
+    this.activeMode = null;
+    this.syncButtonUI();
+    return false;
   }
 
   initContext() {
@@ -103,7 +179,7 @@ class RomanticAudioPlayer {
     if (!this.isPlaying || this.activeMode !== 'synth') return;
     const note = this.melody[this.noteIndex];
     const now = this.ctx.currentTime;
-    
+
     this.playTone(note, now, 1.6);
     if (this.noteIndex % 4 === 0) {
       this.playTone(note / 2, now, 2.2);
@@ -127,6 +203,9 @@ class RomanticAudioPlayer {
     if (this.masterGain && this.ctx) {
       this.masterGain.gain.linearRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
     }
+    if (this.ctx && typeof this.ctx.suspend === 'function' && this.ctx.state === 'running') {
+      this.ctx.suspend().catch(() => {});
+    }
   }
 
   /**
@@ -135,15 +214,17 @@ class RomanticAudioPlayer {
   async playWithFadeIn(targetVolume = 0.5, durationMs = 1500) {
     if (this.isPlaying) return true;
     this.isPlaying = true;
-    
+    this.syncButtonUI();
+
     try {
       this.audioElement.volume = 0;
       await this.audioElement.play();
       this.activeMode = 'audio-file';
 
-      const startTime = performance.now();
+      const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
       const step = (now) => {
-        const elapsed = now - startTime;
+        const currentNow = typeof now === 'number' ? now : Date.now();
+        const elapsed = currentNow - startTime;
         const progress = Math.min(1, elapsed / durationMs);
         this.audioElement.volume = progress * targetVolume;
         if (progress < 1 && this.isPlaying && this.activeMode === 'audio-file') {
@@ -161,16 +242,12 @@ class RomanticAudioPlayer {
 
   async toggle() {
     if (this.isPlaying) {
-      this.isPlaying = false;
-      if (this.activeMode === 'audio-file') {
-        this.audioElement.pause();
-      } else {
-        this.stopSynth();
-      }
-      this.activeMode = null;
-      return false;
+      this.wasPlayingBeforeBackground = false;
+      return this.pause();
     } else {
-      return await this.playWithFadeIn(0.5, 800);
+      const playing = await this.playWithFadeIn(0.5, 800);
+      this.syncButtonUI();
+      return playing;
     }
   }
 }
