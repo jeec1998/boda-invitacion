@@ -4,8 +4,8 @@ import { musicPlayer } from './music.js';
 // Teléfono de los novios para confirmación de asistencia y consultas (+593 0983310033)
 export const WEDDING_PHONE = "593983310033"; 
 
-// Fecha y hora del evento para el contador (Sábado 19 de Diciembre de 2026, 19:00 hrs)
-export const WEDDING_DATE = new Date("2026-12-19T19:00:00").getTime();
+// Fecha y hora del evento para el contador (Sábado 19 de Diciembre de 2026, 19:00 hrs - Hora de Ecuador UTC-5)
+export const WEDDING_DATE = new Date("2026-12-19T19:00:00-05:00").getTime();
 
 // Estado actual
 let currentGuest = DEFAULT_GUEST;
