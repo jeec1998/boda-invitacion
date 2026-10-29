@@ -5,16 +5,21 @@
  * Incluye pausa automática cuando la página pasa a segundo plano (ej. al abrir WhatsApp o cambiar de pestaña).
  */
 
+export const START_OFFSET_SECONDS = 7;
+
 class RomanticAudioPlayer {
   constructor() {
     this.isPlaying = false;
     this.wasPlayingBeforeBackground = false;
     this.activeMode = null; // 'audio-file' | 'synth'
+    this.startOffset = START_OFFSET_SECONDS;
+    this.hasStartedInitialPlayback = false;
 
     // Archivo de audio principal: Thinking Out Loud (Ed Sheeran)
     this.audioElement = new Audio();
     this.audioElement.loop = true;
     this.audioElement.preload = "auto";
+    this.audioElement.currentTime = this.startOffset;
 
     // Rutas candidatas: Local primero, respaldo a CDN de ChungDoi y WAV local
     this.candidateSources = [
@@ -49,11 +54,22 @@ class RomanticAudioPlayer {
       this.audioElement.src = this.candidateSources[this.currentSourceIndex];
     }
 
+    // Al cargar los metadatos del audio, posicionar el inicio en el segundo 7 si aún no ha comenzado
+    this.audioElement.addEventListener('loadedmetadata', () => {
+      if (!this.hasStartedInitialPlayback || this.audioElement.currentTime < this.startOffset) {
+        try {
+          this.audioElement.currentTime = this.startOffset;
+        } catch (_) {}
+      }
+    });
+
     this.audioElement.addEventListener('error', () => {
       this.currentSourceIndex++;
       if (this.currentSourceIndex < this.candidateSources.length) {
+        this.hasStartedInitialPlayback = false;
         this.audioElement.src = this.candidateSources[this.currentSourceIndex];
         if (this.isPlaying && this.activeMode === 'audio-file') {
+          this.applyStartOffsetIfNeeded();
           this.audioElement.play().catch(() => this.startSynth());
         }
       } else {
@@ -62,6 +78,20 @@ class RomanticAudioPlayer {
         }
       }
     });
+  }
+
+  /**
+   * Posiciona la pista en el segundo inicial configurado (7s) cuando arranca por primera vez
+   * o si el navegador reinició el tiempo a < 7s, respetando la posición actual al reanudar tras una pausa.
+   */
+  applyStartOffsetIfNeeded() {
+    const current = Number(this.audioElement.currentTime) || 0;
+    if (!this.hasStartedInitialPlayback || current < this.startOffset) {
+      try {
+        this.audioElement.currentTime = this.startOffset;
+        this.hasStartedInitialPlayback = true;
+      } catch (_) {}
+    }
   }
 
   /**
@@ -218,7 +248,15 @@ class RomanticAudioPlayer {
 
     try {
       this.audioElement.volume = 0;
+      this.applyStartOffsetIfNeeded();
       await this.audioElement.play();
+      // Garantizar en navegadores móviles (iOS/Android) que si play() reinició a 0 antes de bufferizar, salte al segundo 7
+      if ((Number(this.audioElement.currentTime) || 0) < this.startOffset) {
+        try {
+          this.audioElement.currentTime = this.startOffset;
+        } catch (_) {}
+      }
+      this.hasStartedInitialPlayback = true;
       this.activeMode = 'audio-file';
 
       const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
