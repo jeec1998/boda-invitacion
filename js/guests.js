@@ -22,7 +22,7 @@ import {
  * @property {string} customNote  - Mensaje personalizado para la tarjeta de invitación (por defecto `NOTA_ESPECIAL`)
  */
 
-export const DB_VERSION = "2.3.0";
+export const DB_VERSION = "2.4.0";
 export const STORAGE_KEYS = {
   DATA: "boda_invitacion_guests_db_v1",
   VERSION: "boda_invitacion_guests_ver_v1"

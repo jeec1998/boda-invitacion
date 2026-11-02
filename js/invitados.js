@@ -123,5 +123,10 @@ export const INVITADOS = [
     id: 17,
     fullName: "Nancy Magdalena Enríquez Nazate",
     customNote: NOTA_HERMANOS
+  },
+  {
+    id: 18,
+    fullName: "Héctor Guano & Lourdes Nazate",
+    customNote: NOTA_FAMILIA
   }
 ];
