@@ -196,5 +196,11 @@ export const INVITADOS = [
     id: 30,
     fullName: "Sandra Enríquez",
     customNote: NOTA_HIJA
+  },
+  // Hermana
+  {
+    id: 31,
+    fullName: "Sor María Esperanza",
+    customNote: NOTA_HERMANOS
   }
 ];
