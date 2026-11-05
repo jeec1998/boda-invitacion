@@ -5,6 +5,8 @@
  *
  * 1. CONSTANTES DE NOTA ESPECIAL POR CATEGORÍA:
  *    Usa cualquiera de estas constantes en `customNote` según la relación con el invitado:
+ *    - `NOTA_MADRE`     : Para la madre de los novios
+ *    - `NOTA_HIJA`      : Para la hija de los novios
  *    - `NOTA_HERMANOS`  : Para hermanos y hermanas de los novios
  *    - `NOTA_FAMILIA`   : Para padres, núcleos familiares cercanos
  *    - `NOTA_PARIENTES` : Para tíos, primos y parientes
@@ -18,6 +20,12 @@
  *    - `fullName`   : Nombre tal como aparecerá en el sobre, en la tarjeta y en WhatsApp
  *    - `customNote` : Constante de nota según el caso (ej. NOTA_HERMANOS, NOTA_FAMILIA, NOTA_AMIGOS...)
  */
+
+export const NOTA_MADRE =
+  "Madre querida, gracias por tu amor incondicional, tus bendiciones y por ser nuestro mayor ejemplo en la vida. Compartir este día tan soñado a tu lado llena nuestro corazón de infinita gratitud y amor.";
+
+export const NOTA_HIJA =
+  "Hija amada, eres la mayor bendición y el tesoro más grande de nuestras vidas. Verte sonreír y estar a nuestro lado en este paso tan importante llena nuestro corazón de orgullo y felicidad infinita.";
 
 export const NOTA_HERMANOS =
   "Crecimos compartiendo sueños, risas y los mejores recuerdos de la vida. Hoy, en el día más importante de nuestra historia, no podríamos dar este paso sin tu cariño y compañía. ¡Gracias por estar siempre a nuestro lado!";
@@ -158,5 +166,35 @@ export const INVITADOS = [
     id: 24,
     fullName: "Carmen Cortez & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 25,
+    fullName: "Victoria Cortez",
+    customNote: NOTA_MADRE
+  },
+  {
+    id: 26,
+    fullName: "Robinson Moreno & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 27,
+    fullName: "Concepción Cortez & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 28,
+    fullName: "Alex Francisco Cortez",
+    customNote: NOTA_HERMANOS
+  },
+  {
+    id: 29,
+    fullName: "Luis Aníbal & Familia",
+    customNote: NOTA_HERMANOS
+  },
+  {
+    id: 30,
+    fullName: "Sandra Enríquez",
+    customNote: NOTA_HIJA
   }
 ];

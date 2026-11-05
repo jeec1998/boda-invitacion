@@ -1,5 +1,7 @@
 import {
   INVITADOS,
+  NOTA_MADRE,
+  NOTA_HIJA,
   NOTA_HERMANOS,
   NOTA_FAMILIA,
   NOTA_PARIENTES,
@@ -22,7 +24,7 @@ import {
  * @property {string} customNote  - Mensaje personalizado para la tarjeta de invitación (por defecto `NOTA_ESPECIAL`)
  */
 
-export const DB_VERSION = "2.5.0";
+export const DB_VERSION = "2.6.0";
 export const STORAGE_KEYS = {
   DATA: "boda_invitacion_guests_db_v1",
   VERSION: "boda_invitacion_guests_ver_v1"
@@ -308,6 +310,8 @@ export function findGuest(query) {
 
 export {
   INVITADOS,
+  NOTA_MADRE,
+  NOTA_HIJA,
   NOTA_HERMANOS,
   NOTA_FAMILIA,
   NOTA_PARIENTES,
