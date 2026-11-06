@@ -249,12 +249,12 @@ export const INVITADOS = [
   },
   {
     id: 40,
-    fullName: "Jason Suárez & Familia",
+    fullName: "Alexander Suárez & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 41,
-    fullName: "Miller Suárez & Sra.",
+    fullName: "Millier Suárez & Sra.",
     customNote: NOTA_AMIGOS
   },
   {
