@@ -341,5 +341,20 @@ export const INVITADOS = [
     id: 58,
     fullName: "Millón Hernández & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 59,
+    fullName: "Gustavo Jarrín & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 60,
+    fullName: "Andrea Nazate & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 61,
+    fullName: "Lupe Nazate & Familia",
+    customNote: NOTA_FAMILIA
   }
 ];
