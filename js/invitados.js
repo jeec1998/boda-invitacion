@@ -215,7 +215,7 @@ export const INVITADOS = [
   },
   {
     id: 33,
-    fullName: "Sr. Marco Cazco & Familia",
+    fullName: "Sr. Marco Cazco",
     customNote: NOTA_FAMILIA
   },
   {
@@ -330,7 +330,7 @@ export const INVITADOS = [
   },
   {
     id: 56,
-    fullName: "Sr. Freddy Buesaquillo",
+    fullName: "Sr. Freddy Buesaquillo & Familia",
     customNote: NOTA_FAMILIA
   },
   {
@@ -340,7 +340,7 @@ export const INVITADOS = [
   },
   {
     id: 58,
-    fullName: "Sr. Millón Hernández & Familia",
+    fullName: "Sr. Miltón Hernández & Familia",
     customNote: NOTA_FAMILIA
   },
   {
