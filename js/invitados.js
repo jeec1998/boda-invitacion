@@ -207,6 +207,7 @@ export const INVITADOS = [
     fullName: "Sor María Esperanza",
     customNote: NOTA_HERMANOS
   },
+  //invitados padre
   {
     id: 32,
     fullName: "Sra. Luz Angélica Nazate",
@@ -356,5 +357,10 @@ export const INVITADOS = [
     id: 61,
     fullName: "Sra. Lupe Nazate & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 62,
+    fullName: "Sra. Fernanda Granizo",
+    customNote: NOTA_AMIGOS
   }
 ];
