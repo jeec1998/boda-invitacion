@@ -2,13 +2,14 @@ import {
   INVITADOS,
   NOTA_MADRE,
   NOTA_HIJA,
+  NOTA_SOBRINA,
   NOTA_HERMANOS,
   NOTA_FAMILIA,
   NOTA_PARIENTES,
   NOTA_AMIGOS,
   NOTA_PADRINOS,
   NOTA_ESPECIAL
-} from "./invitados.js";
+} from "./invitados.js?v=2.8.1";
 
 /**
  * MOTOR DE BÚSQUEDA Y PERSISTENCIA DE INVITADOS
@@ -24,7 +25,7 @@ import {
  * @property {string} customNote  - Mensaje personalizado para la tarjeta de invitación (por defecto `NOTA_ESPECIAL`)
  */
 
-export const DB_VERSION = "2.7.0";
+export const DB_VERSION = "2.8.0";
 export const STORAGE_KEYS = {
   DATA: "boda_invitacion_guests_db_v1",
   VERSION: "boda_invitacion_guests_ver_v1"
@@ -173,9 +174,13 @@ export const GuestsDB = {
 
       if (storedVersion === targetVersion && rawData) {
         const parsed = JSON.parse(rawData);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          activeGuestsCollection = parsed.map(normalizeGuestRecord);
-          return this.getAll();
+        if (Array.isArray(parsed) && parsed.length >= baseSeed.length) {
+          const parsedIds = new Set(parsed.map(g => Number(g.id)));
+          const allSeedsPresent = baseSeed.every(s => parsedIds.has(s.id));
+          if (allSeedsPresent) {
+            activeGuestsCollection = parsed.map(normalizeGuestRecord);
+            return this.getAll();
+          }
         }
       }
 
@@ -312,6 +317,7 @@ export {
   INVITADOS,
   NOTA_MADRE,
   NOTA_HIJA,
+  NOTA_SOBRINA,
   NOTA_HERMANOS,
   NOTA_FAMILIA,
   NOTA_PARIENTES,

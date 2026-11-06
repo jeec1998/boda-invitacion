@@ -7,6 +7,7 @@
  *    Usa cualquiera de estas constantes en `customNote` según la relación con el invitado:
  *    - `NOTA_MADRE`     : Para la madre de los novios
  *    - `NOTA_HIJA`      : Para la hija de los novios
+ *    - `NOTA_SOBRINA`   : Para sobrinas de los novios
  *    - `NOTA_HERMANOS`  : Para hermanos y hermanas de los novios
  *    - `NOTA_FAMILIA`   : Para padres, núcleos familiares cercanos
  *    - `NOTA_PARIENTES` : Para tíos, primos y parientes
@@ -26,6 +27,9 @@ export const NOTA_MADRE =
 
 export const NOTA_HIJA =
   "Hija amada, eres la mayor bendición y el tesoro más grande de nuestras vidas. Verte sonreír y estar a nuestro lado en este paso tan importante llena nuestro corazón de orgullo y felicidad infinita.";
+
+export const NOTA_SOBRINA =
+  "Querida sobrina, verte crecer y compartir momentos tan especiales ha sido una gran alegría en nuestras vidas. En este día tan soñado, contar con tu cariño y compañía hace nuestra celebración aún más inolvidable.";
 
 export const NOTA_HERMANOS =
   "Crecimos compartiendo sueños, risas y los mejores recuerdos de la vida. Hoy, en el día más importante de nuestra historia, no podríamos dar este paso sin tu cariño y compañía. ¡Gracias por estar siempre a nuestro lado!";
@@ -202,5 +206,140 @@ export const INVITADOS = [
     id: 31,
     fullName: "Sor María Esperanza",
     customNote: NOTA_HERMANOS
+  },
+  {
+    id: 32,
+    fullName: "Luz Angélica Nazate",
+    customNote: NOTA_MADRE
+  },
+  {
+    id: 33,
+    fullName: "Marco Cazco & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 34,
+    fullName: "Lorena Enríquez & Familia",
+    customNote: NOTA_HERMANOS
+  },
+  {
+    id: 35,
+    fullName: "Rodrigo Enríquez & Familia",
+    customNote: NOTA_HERMANOS
+  },
+  {
+    id: 36,
+    fullName: "Alejandro Aguilar & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 37,
+    fullName: "Katyuska Enríquez",
+    customNote: NOTA_SOBRINA
+  },
+  {
+    id: 38,
+    fullName: "Marlon Samaniego & Sra.",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 39,
+    fullName: "Esteven Suárez & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 40,
+    fullName: "Jason Suárez & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 41,
+    fullName: "Miller Suárez & Sra.",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 42,
+    fullName: "Agusto Cazco & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 43,
+    fullName: "Néstor Chela & Sra.",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 44,
+    fullName: "Martha Nazate & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 45,
+    fullName: "Manuel Nazate & Sra.",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 46,
+    fullName: "David Suárez & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 47,
+    fullName: "Alfonso Altamirano & Sra.",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 48,
+    fullName: "José Frías & Familia",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 49,
+    fullName: "Verónica Frías & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 50,
+    fullName: "Jorge Nazate & Sra.",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 51,
+    fullName: "Katherine Nazate & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 52,
+    fullName: "David Nazate & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 53,
+    fullName: "Diego Nazate",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 54,
+    fullName: "Henry Frías",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 55,
+    fullName: "Rodolfo Frías",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 56,
+    fullName: "Freddy Buesaquillo",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 57,
+    fullName: "Javier Naranjo",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 58,
+    fullName: "Millón Hernández & Familia",
+    customNote: NOTA_FAMILIA
   }
 ];

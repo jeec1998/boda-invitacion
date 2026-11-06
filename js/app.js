@@ -1,4 +1,4 @@
-import { GUESTS_DATABASE, DEFAULT_GUEST, GuestsDB, findGuest } from './guests.js';
+import { GUESTS_DATABASE, DEFAULT_GUEST, GuestsDB, findGuest } from './guests.js?v=2.8.1';
 import { musicPlayer } from './music.js';
 
 // Teléfono de los novios para confirmación de asistencia y consultas (+593 0983310033)
