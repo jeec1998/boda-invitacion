@@ -9,7 +9,7 @@ import {
   NOTA_AMIGOS,
   NOTA_PADRINOS,
   NOTA_ESPECIAL
-} from "./invitados.js?v=2.8.2";
+} from "./invitados.js?v=2.9.0";
 
 /**
  * MOTOR DE BÚSQUEDA Y PERSISTENCIA DE INVITADOS
@@ -25,7 +25,7 @@ import {
  * @property {string} customNote  - Mensaje personalizado para la tarjeta de invitación (por defecto `NOTA_ESPECIAL`)
  */
 
-export const DB_VERSION = "2.8.2";
+export const DB_VERSION = "2.9.0";
 export const STORAGE_KEYS = {
   DATA: "boda_invitacion_guests_db_v1",
   VERSION: "boda_invitacion_guests_ver_v1"

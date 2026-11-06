@@ -52,27 +52,27 @@ export const NOTA_ESPECIAL =
 export const INVITADOS = [
   {
     id: 1,
-    fullName: "Carlos Mendoza & Mariana Morales",
+    fullName: "Sr. Carlos Mendoza & Mariana Morales",
     customNote: NOTA_FAMILIA
   },
   {
     id: 2,
-    fullName: "Dr. Fernando Ruiz Alarcón",
+    fullName: "Sr. Dr. Fernando Ruiz Alarcón",
     customNote: NOTA_AMIGOS
   },
   {
     id: 3,
-    fullName: "Roberto Gómez, Andrea Soto & Familia",
+    fullName: "Sr. Roberto Gómez, Andrea Soto & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 4,
-    fullName: "Lic. Sofía Valenzuela & Acompañante",
+    fullName: "Sra. Lic. Sofía Valenzuela & Acompañante",
     customNote: NOTA_AMIGOS
   },
   {
     id: 5,
-    fullName: "Dra. Valentina Castro Méndez",
+    fullName: "Sra. Dra. Valentina Castro Méndez",
     customNote: NOTA_AMIGOS
   },
   {
@@ -82,7 +82,7 @@ export const INVITADOS = [
   },
   {
     id: 7,
-    fullName: "Ricardo Enríquez & Elena Paredes",
+    fullName: "Sr. Ricardo Enríquez & Elena Paredes",
     customNote: NOTA_PARIENTES
   },
   {
@@ -92,27 +92,27 @@ export const INVITADOS = [
   },
   {
     id: 9,
-    fullName: "Alejandro Morales Vega",
+    fullName: "Sr. Alejandro Morales Vega",
     customNote: NOTA_AMIGOS
   },
   {
     id: 10,
-    fullName: "Daniel Salazar & Camila Domínguez",
+    fullName: "Sr. Daniel Salazar & Camila Domínguez",
     customNote: NOTA_AMIGOS
   },
   {
     id: 11,
-    fullName: "Gabriela Montalvo León",
+    fullName: "Sra. Gabriela Montalvo León",
     customNote: NOTA_AMIGOS
   },
   {
     id: 12,
-    fullName: "Andrés Zambrano, Lucía Cevallos & Hijos",
+    fullName: "Sr. Andrés Zambrano, Lucía Cevallos & Hijos",
     customNote: NOTA_PARIENTES
   },
   {
     id: 13,
-    fullName: "Ing. Mateo Cárdenas & Valeria Noboa",
+    fullName: "Sr. Ing. Mateo Cárdenas & Valeria Noboa",
     customNote: NOTA_ESPECIAL
   },
   {
@@ -122,7 +122,7 @@ export const INVITADOS = [
   },
   {
     id: 15,
-    fullName: "Arq. Sebastián Aguirre & Carolina Peñafiel",
+    fullName: "Sr. Arq. Sebastián Aguirre & Carolina Peñafiel",
     customNote: NOTA_AMIGOS
   },
   {
@@ -133,72 +133,72 @@ export const INVITADOS = [
   // Hermana del novio
   {
     id: 17,
-    fullName: "Nancy Magdalena Enríquez Nazate",
+    fullName: "Sra. Nancy Magdalena Enríquez Nazate",
     customNote: NOTA_HERMANOS
   },
   {
     id: 18,
-    fullName: "Héctor Guano & Lourdes Nazate",
+    fullName: "Sr. Héctor Guano & Lourdes Nazate",
     customNote: NOTA_FAMILIA
   },
   {
     id: 19,
-    fullName: "Jairo Moreno & Familia",
+    fullName: "Sr. Jairo Moreno & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 20,
-    fullName: "Willian Moreno & Familia",
+    fullName: "Sr. Willian Moreno & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 21,
-    fullName: "Francisco Suárez Freire & Familia",
+    fullName: "Sr. Francisco Suárez Freire & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 22,
-    fullName: "Edmundo Falconí & Familia",
+    fullName: "Sr. Edmundo Falconí & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 23,
-    fullName: "Jorge Saula & Familia",
+    fullName: "Sr. Jorge Saula & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 24,
-    fullName: "Carmen Cortez & Familia",
+    fullName: "Sra. Carmen Cortez & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 25,
-    fullName: "Victoria Cortez",
+    fullName: "Sra. Victoria Cortez",
     customNote: NOTA_MADRE
   },
   {
     id: 26,
-    fullName: "Robinson Moreno & Familia",
+    fullName: "Sr. Robinson Moreno & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 27,
-    fullName: "Concepción Cortez & Familia",
+    fullName: "Sra. Concepción Cortez & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 28,
-    fullName: "Alex Francisco Cortez",
+    fullName: "Sr. Alex Francisco Cortez",
     customNote: NOTA_HERMANOS
   },
   {
     id: 29,
-    fullName: "Luis Aníbal & Familia",
+    fullName: "Sr. Luis Aníbal & Familia",
     customNote: NOTA_HERMANOS
   },
   {
     id: 30,
-    fullName: "Sandra Enríquez",
+    fullName: "Sra. Sandra Enríquez",
     customNote: NOTA_HIJA
   },
   // Hermana
@@ -209,152 +209,152 @@ export const INVITADOS = [
   },
   {
     id: 32,
-    fullName: "Luz Angélica Nazate",
+    fullName: "Sra. Luz Angélica Nazate",
     customNote: NOTA_MADRE
   },
   {
     id: 33,
-    fullName: "Marco Cazco & Familia",
+    fullName: "Sr. Marco Cazco & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 34,
-    fullName: "Lorena Enríquez & Familia",
+    fullName: "Sra. Lorena Enríquez & Familia",
     customNote: NOTA_HERMANOS
   },
   {
     id: 35,
-    fullName: "Rodrigo Enríquez & Familia",
+    fullName: "Sr. Rodrigo Enríquez & Familia",
     customNote: NOTA_HERMANOS
   },
   {
     id: 36,
-    fullName: "Alejandro Aguilar & Familia",
+    fullName: "Sr. Alejandro Aguilar & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 37,
-    fullName: "Katyuska Enríquez",
+    fullName: "Sra. Katyuska Enríquez",
     customNote: NOTA_SOBRINA
   },
   {
     id: 38,
-    fullName: "Marlon Samaniego & Sra.",
+    fullName: "Sr. Marlon Samaniego & Sra.",
     customNote: NOTA_AMIGOS
   },
   {
     id: 39,
-    fullName: "Esteven Suárez & Familia",
+    fullName: "Sr. Esteven Suárez & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 40,
-    fullName: "Alexander Suárez & Familia",
+    fullName: "Sr. Alexander Suárez & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 41,
-    fullName: "Millier Suárez & Sra.",
+    fullName: "Sr. Millier Suárez & Sra.",
     customNote: NOTA_AMIGOS
   },
   {
     id: 42,
-    fullName: "Agusto Cazco & Familia",
+    fullName: "Sr. Agusto Cazco & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 43,
-    fullName: "Néstor Chela & Sra.",
+    fullName: "Sr. Néstor Chela & Sra.",
     customNote: NOTA_AMIGOS
   },
   {
     id: 44,
-    fullName: "Martha Nazate & Familia",
+    fullName: "Sra. Martha Nazate & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 45,
-    fullName: "Manuel Nazate & Sra.",
+    fullName: "Sr. Manuel Nazate & Sra.",
     customNote: NOTA_FAMILIA
   },
   {
     id: 46,
-    fullName: "David Suárez & Familia",
+    fullName: "Sr. David Suárez & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 47,
-    fullName: "Alfonso Altamirano & Sra.",
+    fullName: "Sr. Alfonso Altamirano & Sra.",
     customNote: NOTA_AMIGOS
   },
   {
     id: 48,
-    fullName: "José Frías & Familia",
+    fullName: "Sr. José Frías & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 49,
-    fullName: "Verónica Frías & Familia",
+    fullName: "Sra. Verónica Frías & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 50,
-    fullName: "Jorge Nazate & Sra.",
+    fullName: "Sr. Jorge Nazate & Sra.",
     customNote: NOTA_FAMILIA
   },
   {
     id: 51,
-    fullName: "Katherine Nazate & Familia",
+    fullName: "Sra. Katherine Nazate & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 52,
-    fullName: "David Nazate & Familia",
+    fullName: "Sr. David Nazate & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 53,
-    fullName: "Diego Nazate",
+    fullName: "Sr. Diego Nazate",
     customNote: NOTA_FAMILIA
   },
   {
     id: 54,
-    fullName: "Henry Frías",
+    fullName: "Sr. Henry Frías",
     customNote: NOTA_FAMILIA
   },
   {
     id: 55,
-    fullName: "Rodolfo Frías",
+    fullName: "Sr. Rodolfo Frías",
     customNote: NOTA_FAMILIA
   },
   {
     id: 56,
-    fullName: "Freddy Buesaquillo",
+    fullName: "Sr. Freddy Buesaquillo",
     customNote: NOTA_FAMILIA
   },
   {
     id: 57,
-    fullName: "Javier Naranjo",
+    fullName: "Sr. Javier Naranjo",
     customNote: NOTA_AMIGOS
   },
   {
     id: 58,
-    fullName: "Millón Hernández & Familia",
+    fullName: "Sr. Millón Hernández & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 59,
-    fullName: "Gustavo Jarrín & Familia",
+    fullName: "Sr. Gustavo Jarrín & Familia",
     customNote: NOTA_AMIGOS
   },
   {
     id: 60,
-    fullName: "Andrea Nazate & Familia",
+    fullName: "Sra. Andrea Nazate & Familia",
     customNote: NOTA_FAMILIA
   },
   {
     id: 61,
-    fullName: "Lupe Nazate & Familia",
+    fullName: "Sra. Lupe Nazate & Familia",
     customNote: NOTA_FAMILIA
   }
 ];
