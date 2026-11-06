@@ -370,7 +370,7 @@ export const INVITADOS = [
   },
   {
     id: 64,
-    fullName: "Sr. Paul Proaño",
+    fullName: "Sr. Paul Proaño & Familia",
     customNote: NOTA_FAMILIA
   },
   {
@@ -380,7 +380,7 @@ export const INVITADOS = [
   },
   {
     id: 66,
-    fullName: "Sr. Cesar Proaño",
+    fullName: "Sr. Cesar Proaño & Familia",
     customNote: NOTA_FAMILIA
   },
   {
@@ -397,5 +397,10 @@ export const INVITADOS = [
     id: 69,
     fullName: "Sr. Renato Cardenas ",
     customNote: NOTA_AMIGOS
+  },
+  {
+    id: 70,
+    fullName: "Sra. Nancy Proaño & Familia",
+    customNote: NOTA_FAMILIA
   }
 ];
