@@ -362,5 +362,35 @@ export const INVITADOS = [
     id: 62,
     fullName: "Sra. Fernanda Granizo",
     customNote: NOTA_AMIGOS
+  },
+  {
+    id: 63,
+    fullName: "Sra María José Proaño & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 64,
+    fullName: "Sr. Paul Proaño",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 65,
+    fullName: "Sr. Ricardo Proaño",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 66,
+    fullName: "Sr. Cesar Proaño",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 67,
+    fullName: "Sr. Christopher Richardson & Familia",
+    customNote: NOTA_HERMANOS
+  },
+  {
+    id: 68,
+    fullName: "Sr. Walter Delgado & Familia",
+    customNote: NOTA_FAMILIA
   }
 ];
