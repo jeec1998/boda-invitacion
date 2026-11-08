@@ -402,5 +402,15 @@ export const INVITADOS = [
     id: 70,
     fullName: "Sra. Nancy Proaño & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 71,
+    fullName: "Sra. Nancy Proaño & Familia",
+    customNote: NOTA_FAMILIA
+  },
+  {
+    id: 71,
+    fullName: "Sr. Christian Zambrano",
+    customNote: NOTA_AMIGOS
   }
 ];
