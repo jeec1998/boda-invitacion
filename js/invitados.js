@@ -417,5 +417,10 @@ export const INVITADOS = [
     id: 73,
     fullName: "Sr.Jhon Narvàez & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 74,
+    fullName: "Sr Anibal Canacuán & Familia",
+    customNote: NOTA_FAMILIA
   }
 ];
