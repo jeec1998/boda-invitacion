@@ -425,7 +425,7 @@ export const INVITADOS = [
   },
   {
     id: 75,
-    fullName: "Dr. Medardo Nazate & Familia",
+    fullName: "Sr. Medardo Nazate & Familia",
     customNote: NOTA_FAMILIA
   }
 ];
