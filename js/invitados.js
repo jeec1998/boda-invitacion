@@ -427,5 +427,35 @@ export const INVITADOS = [
     id: 75,
     fullName: "Sr. Medardo Nazate & Familia",
     customNote: NOTA_FAMILIA
+  },
+  {
+    id: 76,
+    fullName: "Sr. Edisson Mauricio Bastidas Rosero",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 77,
+    fullName: "Sr. Francis Josué Quishpe Chugchilán",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 78,
+    fullName: "Sra. Génesis Daniela Chávez Basantes",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 79,
+    fullName: "Sr. Jhosep Alan Castillo Méndez",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 80,
+    fullName: "Sr. Anderson Joel Guevara Mendoza",
+    customNote: NOTA_AMIGOS
+  },
+  {
+    id: 81,
+    fullName: "Sra. Escarlet Arihanna Andino Arqui",
+    customNote: NOTA_AMIGOS
   }
 ];
