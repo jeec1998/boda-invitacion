@@ -462,5 +462,11 @@ export const INVITADOS = [
     id: 82,
     fullName: "Sr. Jairo Zambrano & Familia",
     customNote: NOTA_AMIGOS
-  }
+  },
+  {
+    id: 83,
+    fullName: "Sr. Nicolas Gutierrez & Familia",
+    customNote: NOTA_AMIGOS
+  },
+
 ];
